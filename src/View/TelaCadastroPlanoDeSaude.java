@@ -245,7 +245,7 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
         try {
             
             if(planoDeSaudeController.cadastrarPlanoDeSaude(planoDeSaude)) {
-                JOptionPane.showMessageDialog(null, "Plano de Saúde cadastrado com Sucesso!");
+                JOptionPane.showMessageDialog(null, "Plano de Saúde cadastrado com Sucesso!!!!");
 
                 dispose();
                 TelaPrincipal telaPrincipal = new TelaPrincipal();
