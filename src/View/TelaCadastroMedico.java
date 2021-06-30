@@ -304,7 +304,7 @@ public class TelaCadastroMedico extends javax.swing.JFrame {
             medico.setDataDeNascimento(sdf.parse(txtDataNascimento.getText()));
             
             if(medicoController.cadastrarMedico(medico)) {
-                JOptionPane.showMessageDialog(null, "Médico cadastrado com Sucesso!");
+                JOptionPane.showMessageDialog(null, "Médico cadastrado com Sucesso!!!");
 
                 dispose();
                 TelaPrincipal telaPrincipal = new TelaPrincipal();
