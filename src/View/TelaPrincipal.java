@@ -34,34 +34,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        panelPrincipal = new javax.swing.JPanel();
+        menuBarPrincipal = new javax.swing.JMenuBar();
+        menuCadastrar = new javax.swing.JMenu();
         menuItemCadUsuario = new javax.swing.JMenuItem();
         menuItemCadPaciente = new javax.swing.JMenuItem();
         menuItemCadMedico = new javax.swing.JMenuItem();
         menuItemCadPlanoSaude = new javax.swing.JMenuItem();
         menuItemCadConsulta = new javax.swing.JMenuItem();
         menuItemCadPerfil = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuRelatorios = new javax.swing.JMenu();
+        menuItemRelUsuarios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
+        panelPrincipal.setLayout(panelPrincipalLayout);
+        panelPrincipalLayout.setHorizontalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 684, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelPrincipalLayout.setVerticalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 412, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Cadastrar");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menuCadastrar.setText("Cadastrar");
+        menuCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         menuItemCadUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         menuItemCadUsuario.setText("Usuário");
@@ -70,7 +70,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuItemCadUsuarioActionPerformed(evt);
             }
         });
-        jMenu1.add(menuItemCadUsuario);
+        menuCadastrar.add(menuItemCadUsuario);
 
         menuItemCadPaciente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         menuItemCadPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cadastrar_paciente.png"))); // NOI18N
@@ -80,7 +80,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuItemCadPacienteActionPerformed(evt);
             }
         });
-        jMenu1.add(menuItemCadPaciente);
+        menuCadastrar.add(menuItemCadPaciente);
 
         menuItemCadMedico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         menuItemCadMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cadastrar_medicos.png"))); // NOI18N
@@ -90,7 +90,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuItemCadMedicoActionPerformed(evt);
             }
         });
-        jMenu1.add(menuItemCadMedico);
+        menuCadastrar.add(menuItemCadMedico);
 
         menuItemCadPlanoSaude.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         menuItemCadPlanoSaude.setText("Plano de Saúde");
@@ -99,7 +99,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuItemCadPlanoSaudeActionPerformed(evt);
             }
         });
-        jMenu1.add(menuItemCadPlanoSaude);
+        menuCadastrar.add(menuItemCadPlanoSaude);
 
         menuItemCadConsulta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         menuItemCadConsulta.setText("Consulta");
@@ -108,7 +108,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuItemCadConsultaActionPerformed(evt);
             }
         });
-        jMenu1.add(menuItemCadConsulta);
+        menuCadastrar.add(menuItemCadConsulta);
 
         menuItemCadPerfil.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         menuItemCadPerfil.setText("Perfil");
@@ -117,34 +117,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuItemCadPerfilActionPerformed(evt);
             }
         });
-        jMenu1.add(menuItemCadPerfil);
+        menuCadastrar.add(menuItemCadPerfil);
 
-        jMenuBar1.add(jMenu1);
+        menuBarPrincipal.add(menuCadastrar);
 
-        jMenu2.setText("Relatórios");
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menuRelatorios.setText("Relatórios");
+        menuRelatorios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        jMenuItem1.setText("Relatório de Usuários");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuItemRelUsuarios.setText("Relatório de Usuários");
+        menuItemRelUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuItemRelUsuariosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        menuRelatorios.add(menuItemRelUsuarios);
 
-        jMenuBar1.add(jMenu2);
+        menuBarPrincipal.add(menuRelatorios);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBarPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -268,13 +268,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuItemCadMedicoActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuItemRelUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRelUsuariosActionPerformed
         
         UsuarioController usuarioController = new UsuarioController();
         
         usuarioController.gerarRelatorioUsuario();
         
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuItemRelUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,16 +312,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuBar menuBarPrincipal;
+    private javax.swing.JMenu menuCadastrar;
     private javax.swing.JMenuItem menuItemCadConsulta;
     private javax.swing.JMenuItem menuItemCadMedico;
     private javax.swing.JMenuItem menuItemCadPaciente;
     private javax.swing.JMenuItem menuItemCadPerfil;
     private javax.swing.JMenuItem menuItemCadPlanoSaude;
     private javax.swing.JMenuItem menuItemCadUsuario;
+    private javax.swing.JMenuItem menuItemRelUsuarios;
+    private javax.swing.JMenu menuRelatorios;
+    private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
 }
