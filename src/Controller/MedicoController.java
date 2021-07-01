@@ -102,11 +102,11 @@ public class MedicoController {
         telaAlterarMedico.txtEspecialidade.setText(medico.getEspecialidade());
         telaAlterarMedico.txtSalario.setText(medico.getSalario());
         if(medico.getSexo() == 'M')
-            telaAlterarMedico.radioButtonMasculino.isSelected();
+            telaAlterarMedico.radioButtonMasculino.setSelected(true);
         if(medico.getSexo() == 'F')
-            telaAlterarMedico.radioButtonFeminino.isSelected();
+            telaAlterarMedico.radioButtonFeminino.setSelected(true);
         if(medico.getSexo() == 'O')
-            telaAlterarMedico.radioButtonOutrosSexo.isSelected();
+            telaAlterarMedico.radioButtonOutrosSexo.setSelected(true);
         
         telaAlterarMedico.txtDataNascimento.setText(sdf.format(medico.getDataDeNascimento()));
         

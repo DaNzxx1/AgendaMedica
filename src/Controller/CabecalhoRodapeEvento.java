@@ -30,16 +30,24 @@ public class CabecalhoRodapeEvento extends PdfPageEventHelper {
         Phrase turma_professor = new Phrase(15F, "TURMA: 3F- INFORMÁTICA / PROFESSOR: Ivan",
                 FontFactory.getFont(FontFactory.HELVETICA, 10F));
         
-        //Image imagem;
-        
-        /*imagem = Image.getInstance("imagens/banner_relatorios.PNG");
-        imagem.scaleAbsolute(600f, 100f);
-        imagem.setAlignment(Element.ALIGN_CENTER);
-        imagem.setAbsolutePosition(120, 490);
-        writer.getDirectContent().addImage(imagem, true);*/
-        ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, tituloETB, 420, 490, 0);
-        ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, tituloDisciplina, 420, 480, 0);
-        ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, turma_professor, 420, 470, 0);
+        Image imagem;
+        try {
+            imagem = Image.getInstance("Imagens/banner_relatorios.PNG");
+            imagem.scaleAbsolute(600f, 100f);
+            imagem.setAlignment(Element.ALIGN_CENTER);
+            imagem.setAbsolutePosition(120, 490);
+            writer.getDirectContent().addImage(imagem, true);
+            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, tituloETB, 420, 490, 0);
+            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, tituloDisciplina, 420, 480, 0);
+            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, turma_professor, 420, 470, 0);
+            
+        } catch (BadElementException ex) {
+            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(CabecalhoRodapeEvento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void onEndPage(PdfWriter writer, Document document) {
