@@ -6,6 +6,7 @@
 package View;
 
 import Controller.MedicoController;
+import Controller.PlanoDeSaudeController;
 import Controller.UsuarioController;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -48,6 +49,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuRelatorios = new javax.swing.JMenu();
         menuItemRelUsuarios = new javax.swing.JMenuItem();
         menuItemRelMedicos = new javax.swing.JMenuItem();
+        menuItemRelPlano = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -129,6 +131,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuRelatorios.setText("Relatórios");
         menuRelatorios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menuRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRelatoriosActionPerformed(evt);
+            }
+        });
 
         menuItemRelUsuarios.setText("Relatório de Usuários");
         menuItemRelUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +152,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuRelatorios.add(menuItemRelMedicos);
+
+        menuItemRelPlano.setText("Relatório de Planos de Saúde");
+        menuItemRelPlano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRelPlanoActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(menuItemRelPlano);
 
         menuBarPrincipal.add(menuRelatorios);
 
@@ -323,6 +338,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuSairMouseClicked
 
+    private void menuRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatoriosActionPerformed
+        
+    }//GEN-LAST:event_menuRelatoriosActionPerformed
+
+    private void menuItemRelPlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRelPlanoActionPerformed
+        PlanoDeSaudeController planoDeSaudeController = new PlanoDeSaudeController();
+        
+        planoDeSaudeController.gerarRelatorioPlanoDeSaude();
+    }//GEN-LAST:event_menuItemRelPlanoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -369,6 +394,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemCadPlanoSaude;
     private javax.swing.JMenuItem menuItemCadUsuario;
     private javax.swing.JMenuItem menuItemRelMedicos;
+    private javax.swing.JMenuItem menuItemRelPlano;
     private javax.swing.JMenuItem menuItemRelUsuarios;
     private javax.swing.JMenu menuRelatorios;
     private javax.swing.JMenu menuSair;

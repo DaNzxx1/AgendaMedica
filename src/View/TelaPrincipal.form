@@ -102,6 +102,9 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuRelatoriosActionPerformed"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemRelUsuarios">
               <Properties>
@@ -117,6 +120,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemRelMedicosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemRelPlano">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Planos de Sa&#xfa;de"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemRelPlanoActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
