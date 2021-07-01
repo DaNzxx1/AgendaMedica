@@ -169,7 +169,7 @@ public class PlanoDeSaudeController {
             tabelaPlanosDeSaude.setPadding(2);
             //tabelaUsuarios.setSpacing(0);
             tabelaPlanosDeSaude.setWidth(100f);
-            tabelaPlanosDeSaude.setWidths(new float[]{10f, 30f, 20f, 10f, 15f, 15f});
+            tabelaPlanosDeSaude.setWidths(new float[]{3f, 13f, 10f, 10f, 42f, 12f});
             
             Paragraph paragrafoId = new Paragraph(new Phrase(12F, "ID",
                     FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10F)));
@@ -234,7 +234,7 @@ public class PlanoDeSaudeController {
                 paragrafoCodigoPlano.setAlignment(Element.ALIGN_CENTER);
                 celulaPlanoDeSaudeCodigoPlano = new Cell(paragrafoCodigoPlano);
                 celulaPlanoDeSaudeCodigoPlano.setBorderColor(Color.black);
-                celulaPlanoDeSaudeCodigoPlano.setHorizontalAlignment(Element.ALIGN_LEFT);
+                celulaPlanoDeSaudeCodigoPlano.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tabelaPlanosDeSaude.addCell(celulaPlanoDeSaudeCodigoPlano);
                 
                 paragrafoOperadora = new Paragraph(new Phrase(15F, ""+ planoDeSaude.getOperadora(),
@@ -273,7 +273,7 @@ public class PlanoDeSaudeController {
             
             documento.add(tabelaPlanosDeSaude);
             
-            Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", "start", "relatorioMedico.pdf"});
+            Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", "start", "relatorioPlanoDeSaude.pdf"});
             
             documento.close();
         
