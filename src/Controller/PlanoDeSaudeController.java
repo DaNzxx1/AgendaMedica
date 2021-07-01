@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 
 public class PlanoDeSaudeController {
 
+
     StringBuilder mensagensDeErro = new StringBuilder();
     PlanoDeSaudeDAO planoDeSaudeDao = new PlanoDeSaudeDAO();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -290,5 +291,9 @@ public class PlanoDeSaudeController {
         
     private List<PlanoDeSaude> listarTodosPlanosDeSaude() throws SQLException {
         return planoDeSaudeDao.listarTodos();
-    }    
+    }
+
+    public void alterarPlanoDeSaude(PlanoDeSaude planoDeSaude) throws SQLException {
+        planoDeSaudeDao.atualizar(planoDeSaude);
+    }
 }
