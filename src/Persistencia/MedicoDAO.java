@@ -76,26 +76,42 @@ public class MedicoDAO extends ConexaoComBancoDeDados implements InterfaceDAO {
     public void atualizar(Object entidade) throws SQLException {
         Medico medico = (Medico)entidade;
         
-        String sql = "UPDATE MEDICO SET"
-                + "NOME = ?,"
+        String sql = "UPDATE MEDICO SET "
+                + " NOME = ?,"
                 + "ESPECIALIDADE = ?,"
                 + "SEXO = ?,"
                 + "DATA_DE_NASCIMENTO = ?,"
-                + "SALARIO = ?";
+                + "SALARIO = ? WHERE CRM = ?";
         
         conectar();
         
-        PreparedStatement pstm = conexao.prepareStatement(sql);
-        pstm.setString(1, medico.getNome());
-        pstm.setString(2, medico.getEspecialidade());
-        pstm.setString(3, Character.toString(medico.getSexo()));
-        Date dataPadraoSql = new Date(medico.getDataDeNascimento().getTime());
-        pstm.setDate(4, dataPadraoSql);
-        pstm.setString(5, medico.getSalario());
-        pstm.execute();
+            System.out.println(medico);
+          
+            System.out.println(medico.getCRM());
+            System.out.println(medico.getNome());
+            System.out.println(medico.getEspecialidade());
+            System.out.println(medico.getSexo());
+            System.out.println(medico.getSalario());
+            Date dataPadraoSql2 = new Date(medico.getDataDeNascimento().getTime());
+            System.out.println(dataPadraoSql2);
         
-        conexao.commit();
-        desconectar();
+        try {
+            PreparedStatement pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, medico.getNome());
+            pstm.setString(2, medico.getEspecialidade());
+            pstm.setString(3, Character.toString(medico.getSexo()));
+            Date dataPadraoSql = new Date(medico.getDataDeNascimento().getTime());
+            pstm.setDate(4, dataPadraoSql);
+            pstm.setString(5, medico.getSalario());
+            pstm.setInt(6, medico.getCRM());
+            pstm.execute();
+
+            conexao.commit();
+            desconectar();
+        } catch (SQLException e) {
+
+            System.out.println(e);
+        }
     }
 
     @Override

@@ -7,92 +7,28 @@ package View;
 
 import Controller.MedicoController;
 import Entidades.Medico;
-import java.awt.Component;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Danilo
  */
-public class TelaCadastroMedico extends javax.swing.JFrame {
+public class TelaAlterarMedico extends javax.swing.JFrame {
 
     MedicoController medicoController = new MedicoController();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    DefaultTableModel tabelaPadrao;
-    DefaultTableCellRenderer renderizadorDeCelula = new DefaultTableCellRenderer();
     
-    public TelaCadastroMedico() throws SQLException {
-        
+    public TelaAlterarMedico() {
         initComponents();
         
         setLocationRelativeTo(null);
         
-        renderizadorDeCelula.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        tabelaMedicosCadastrados.getTableHeader().setDefaultRenderer(renderizadorDeCelula);
-        
-        for(int i = 0; i < tabelaMedicosCadastrados.getColumnCount(); i++) {
-            if(i != 1)
-                tabelaMedicosCadastrados.getColumnModel().getColumn(i).setCellRenderer(renderizadorDeCelula);
-        }
-        
-        tabelaPadrao = (DefaultTableModel)tabelaMedicosCadastrados.getModel();
-        
-        atualizarTabela();
-        
-    }
-    
-    private void atualizarTabela() throws SQLException {
-        
-        for (Medico medico : medicoController.listarTodosMedicos()) {
-            tabelaPadrao.addRow(new Object[] {
-                medico.getCRM(),
-                medico.getNome(),
-                medico.getEspecialidade(),
-                medico.getSexo(),
-                sdf.format(medico.getDataDeNascimento()),
-                medico.getSalario()
-            });
-        }
-    }
-    
-    private void limparFormulario() {
-        
-        for (int i = 0; i < painelDados.getComponentCount(); i++) {
-            //Varre todos os componentes do painel
-            
-            Component componente = painelDados.getComponent(i);
-            
-            if(componente instanceof JTextField) {
-                //Apaga os valores
-                JTextField field = (JTextField)componente;
-                field.setText(null);
-            }
-            
-            if(componente instanceof JFormattedTextField) {
-                //Apaga os valores
-                JFormattedTextField fieldFormated = (JFormattedTextField)componente;
-                fieldFormated.setText(null);
-            }
-        }
+        txtCrm.setVisible(false);
     }
 
-    private void refreshTabela() throws SQLException {
-        
-        new TelaCadastroMedico().setVisible(true);
-        dispose();
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -116,17 +52,12 @@ public class TelaCadastroMedico extends javax.swing.JFrame {
         radioButtonOutrosSexo = new javax.swing.JRadioButton();
         labelDataNascimento = new javax.swing.JLabel();
         txtDataNascimento = new javax.swing.JFormattedTextField();
-        buttonCadastrar = new javax.swing.JButton();
+        buttonSalvarAlteracoes = new javax.swing.JButton();
+        buttonVoltar = new javax.swing.JButton();
         labelBanner = new javax.swing.JLabel();
-        scrollPaneTabela = new javax.swing.JScrollPane();
-        tabelaMedicosCadastrados = new javax.swing.JTable();
-        buttonAlterar = new javax.swing.JButton();
-        buttonHome = new javax.swing.JButton();
-        buttonExcluir = new javax.swing.JButton();
+        txtCrm = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastrar Médico");
-        setResizable(false);
 
         painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Cadastro do Médico", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
@@ -175,11 +106,19 @@ public class TelaCadastroMedico extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        buttonCadastrar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        buttonCadastrar.setText("Cadastrar");
-        buttonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        buttonSalvarAlteracoes.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        buttonSalvarAlteracoes.setText("Salvar Alterações");
+        buttonSalvarAlteracoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCadastrarActionPerformed(evt);
+                buttonSalvarAlteracoesActionPerformed(evt);
+            }
+        });
+
+        buttonVoltar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        buttonVoltar.setText("Voltar");
+        buttonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonVoltarActionPerformed(evt);
             }
         });
 
@@ -224,7 +163,11 @@ public class TelaCadastroMedico extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(buttonCadastrar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelDadosLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(buttonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(buttonSalvarAlteracoes)))
                 .addContainerGap())
         );
         painelDadosLayout.setVerticalGroup(
@@ -254,7 +197,9 @@ public class TelaCadastroMedico extends javax.swing.JFrame {
                 .addGroup(painelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelDadosLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(buttonCadastrar))
+                        .addGroup(painelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonSalvarAlteracoes)
+                            .addComponent(buttonVoltar)))
                     .addGroup(painelDadosLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioButtonFeminino)
@@ -265,115 +210,55 @@ public class TelaCadastroMedico extends javax.swing.JFrame {
 
         labelBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/banner.PNG"))); // NOI18N
 
-        tabelaMedicosCadastrados.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        tabelaMedicosCadastrados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "CRM", "NOME", "ESPECIALIDADE", "SEXO", "SALÁRIO", "DATA DE NASCIMENTO"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabelaMedicosCadastrados.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        scrollPaneTabela.setViewportView(tabelaMedicosCadastrados);
-        if (tabelaMedicosCadastrados.getColumnModel().getColumnCount() > 0) {
-            tabelaMedicosCadastrados.getColumnModel().getColumn(0).setResizable(false);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(0).setPreferredWidth(80);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(1).setResizable(false);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(2).setResizable(false);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(2).setPreferredWidth(150);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(3).setResizable(false);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(3).setPreferredWidth(80);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(4).setResizable(false);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(4).setPreferredWidth(100);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(5).setResizable(false);
-            tabelaMedicosCadastrados.getColumnModel().getColumn(5).setPreferredWidth(150);
-        }
-
-        buttonAlterar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        buttonAlterar.setText("Alterar");
-        buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAlterarActionPerformed(evt);
-            }
-        });
-
-        buttonHome.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        buttonHome.setText("Home");
-        buttonHome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonHomeActionPerformed(evt);
-            }
-        });
-
-        buttonExcluir.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        buttonExcluir.setText("Excluir");
-        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonExcluirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(labelBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(painelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(scrollPaneTabela))))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(159, 159, 159)
-                .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addGap(295, 295, 295)
+                .addComponent(txtCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(471, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(labelBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(22, 22, 22)
+                            .addComponent(painelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelBanner)
-                .addGap(18, 18, 18)
-                .addComponent(painelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                .addContainerGap(385, Short.MAX_VALUE)
+                .addComponent(txtCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(labelBanner)
+                    .addGap(18, 18, 18)
+                    .addComponent(painelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
+    private void radioButtonMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonMasculinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioButtonMasculinoActionPerformed
 
+    private void buttonSalvarAlteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarAlteracoesActionPerformed
+        dispose();
+        
         Medico medico = new Medico();
+        medico.setCRM(Integer.parseInt(txtCrm.getText()));
         medico.setNome(txtNome.getText().trim());
         medico.setEspecialidade(txtEspecialidade.getText().trim());
         medico.setSalario(txtSalario.getText().trim());
-        
+
         //Tratar a radioButtonSexo
         if(radioButtonMasculino.isSelected())
             medico.setSexo('M');
@@ -381,84 +266,30 @@ public class TelaCadastroMedico extends javax.swing.JFrame {
             medico.setSexo('F');
         if(radioButtonOutrosSexo.isSelected())
             medico.setSexo('O');
-        
+
         try {
             medico.setDataDeNascimento(sdf.parse(txtDataNascimento.getText()));
-            
-            if(medicoController.cadastrarMedico(medico)) {
-                JOptionPane.showMessageDialog(null, "Médico cadastrado com Sucesso!!!");
 
-                dispose();
-                TelaPrincipal telaPrincipal = new TelaPrincipal();
-                telaPrincipal.setVisible(true);
-                telaPrincipal.setLocationRelativeTo(null);
-            }
+            medicoController.alterarMedico(medico);
+            JOptionPane.showMessageDialog(null, "Médico alterado com Sucesso!");
+            new TelaPrincipal().setVisible(true);
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "A data de nascimento deve ser preenchida");
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+    }//GEN-LAST:event_buttonSalvarAlteracoesActionPerformed
 
-    }//GEN-LAST:event_buttonCadastrarActionPerformed
+    private void buttonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVoltarActionPerformed
 
-    private void radioButtonMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonMasculinoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioButtonMasculinoActionPerformed
-
-    private void buttonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarActionPerformed
-
-        int linhaSelecionada = -1;
-
-        linhaSelecionada = tabelaMedicosCadastrados.getSelectedRow();
-
-        if(linhaSelecionada >= 0) {
-
-            int crm = (Integer)tabelaMedicosCadastrados.getValueAt(linhaSelecionada, 0);
-
-            try {
-                Medico medicoDoBanco = medicoController.buscarPorId(crm);
-
-                medicoController.abrirTelaAlterarMedico(medicoDoBanco);
-
-                dispose();
-            } catch (SQLException ex) {
-                System.out.println(ex);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha!");
+        try {
+            dispose();
+            new TelaCadastroMedico().setVisible(true);
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
 
-    }//GEN-LAST:event_buttonAlterarActionPerformed
-
-    private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed
-
-        dispose();
-        new TelaPrincipal().setVisible(true);
-
-    }//GEN-LAST:event_buttonHomeActionPerformed
-
-    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
-
-        int linhaSelecionada = -1;
-
-        linhaSelecionada = tabelaMedicosCadastrados.getSelectedRow();
-
-        if(linhaSelecionada >= 0) {
-
-            int crm = (Integer)tabelaMedicosCadastrados.getValueAt(linhaSelecionada, 0);
-
-            try {
-                medicoController.excluir(crm);
-                refreshTabela();
-            } catch (SQLException ex) {
-                System.out.println(ex);
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha!");
-        }
-
-    }//GEN-LAST:event_buttonExcluirActionPerformed
+    }//GEN-LAST:event_buttonVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -477,34 +308,28 @@ public class TelaCadastroMedico extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new TelaCadastroMedico().setVisible(true);
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
+                new TelaAlterarMedico().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAlterar;
-    private javax.swing.JButton buttonCadastrar;
-    private javax.swing.JButton buttonExcluir;
     private javax.swing.ButtonGroup buttonGroupSexo;
-    private javax.swing.JButton buttonHome;
+    private javax.swing.JButton buttonSalvarAlteracoes;
+    private javax.swing.JButton buttonVoltar;
     private javax.swing.JLabel labelBanner;
     private javax.swing.JLabel labelDataNascimento;
     private javax.swing.JLabel labelEspecialidade;
@@ -512,14 +337,13 @@ public class TelaCadastroMedico extends javax.swing.JFrame {
     private javax.swing.JLabel labelSalario;
     private javax.swing.JLabel labelSexo;
     private javax.swing.JPanel painelDados;
-    private javax.swing.JRadioButton radioButtonFeminino;
-    private javax.swing.JRadioButton radioButtonMasculino;
-    private javax.swing.JRadioButton radioButtonOutrosSexo;
-    private javax.swing.JScrollPane scrollPaneTabela;
-    private javax.swing.JTable tabelaMedicosCadastrados;
-    private javax.swing.JFormattedTextField txtDataNascimento;
-    private javax.swing.JTextField txtEspecialidade;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JFormattedTextField txtSalario;
+    public javax.swing.JRadioButton radioButtonFeminino;
+    public javax.swing.JRadioButton radioButtonMasculino;
+    public javax.swing.JRadioButton radioButtonOutrosSexo;
+    public javax.swing.JTextField txtCrm;
+    public javax.swing.JFormattedTextField txtDataNascimento;
+    public javax.swing.JTextField txtEspecialidade;
+    public javax.swing.JTextField txtNome;
+    public javax.swing.JFormattedTextField txtSalario;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.MedicoController;
 import Controller.UsuarioController;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -34,6 +35,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
         panelPrincipal = new javax.swing.JPanel();
         menuBarPrincipal = new javax.swing.JMenuBar();
         menuCadastrar = new javax.swing.JMenu();
@@ -45,6 +47,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuItemCadPerfil = new javax.swing.JMenuItem();
         menuRelatorios = new javax.swing.JMenu();
         menuItemRelUsuarios = new javax.swing.JMenuItem();
+        menuItemRelMedicos = new javax.swing.JMenuItem();
+        menuSair = new javax.swing.JMenu();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal");
@@ -132,7 +138,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuRelatorios.add(menuItemRelUsuarios);
 
+        menuItemRelMedicos.setText("Relatório de Médicos");
+        menuItemRelMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRelMedicosActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(menuItemRelMedicos);
+
         menuBarPrincipal.add(menuRelatorios);
+
+        menuSair.setText("Sair");
+        menuSair.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuSairMouseClicked(evt);
+            }
+        });
+        menuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairActionPerformed(evt);
+            }
+        });
+        menuBarPrincipal.add(menuSair);
 
         setJMenuBar(menuBarPrincipal);
 
@@ -276,6 +304,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuItemRelUsuariosActionPerformed
 
+    private void menuItemRelMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRelMedicosActionPerformed
+        MedicoController medicoController = new MedicoController();
+        medicoController.gerarRelatorioMedico();
+    }//GEN-LAST:event_menuItemRelMedicosActionPerformed
+
+    private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
+        
+        new TelaLogin().setVisible(true);
+        dispose();
+        
+    }//GEN-LAST:event_menuSairActionPerformed
+
+    private void menuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSairMouseClicked
+        
+        new TelaLogin().setVisible(true);
+        dispose();
+        
+    }//GEN-LAST:event_menuSairMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -312,6 +359,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar menuBarPrincipal;
     private javax.swing.JMenu menuCadastrar;
     private javax.swing.JMenuItem menuItemCadConsulta;
@@ -320,8 +368,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemCadPerfil;
     private javax.swing.JMenuItem menuItemCadPlanoSaude;
     private javax.swing.JMenuItem menuItemCadUsuario;
+    private javax.swing.JMenuItem menuItemRelMedicos;
     private javax.swing.JMenuItem menuItemRelUsuarios;
     private javax.swing.JMenu menuRelatorios;
+    private javax.swing.JMenu menuSair;
     private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
 }
