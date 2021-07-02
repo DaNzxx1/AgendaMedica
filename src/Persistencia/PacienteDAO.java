@@ -41,6 +41,18 @@ public class PacienteDAO extends ConexaoComBancoDeDados implements InterfaceDAO 
         String sql = "DELETE FROM PACIENTE WHERE ID = ?";
         
         conectar();
+        
+            System.out.println(paciente);
+          
+            System.out.println(paciente.getCpf());
+            System.out.println(paciente.getNome());
+            System.out.println(paciente.getEndereco());
+            System.out.println(paciente.getTelefone());
+            System.out.println(paciente.getSexo());
+            Date dataPadraoSql2 = new Date(paciente.getDataDeNascimento().getTime());
+            System.out.println(dataPadraoSql2);
+            System.out.println(paciente.getId());
+             
         PreparedStatement pstm = conexao.prepareStatement(sql);
         pstm.setInt(1, paciente.getId());
         pstm.execute();
@@ -70,6 +82,7 @@ public class PacienteDAO extends ConexaoComBancoDeDados implements InterfaceDAO 
         }
         desconectar();
         
+        
         return paciente;
     }
 
@@ -77,28 +90,45 @@ public class PacienteDAO extends ConexaoComBancoDeDados implements InterfaceDAO 
     public void atualizar(Object entidade) throws SQLException {
         Paciente paciente = (Paciente)entidade;
         
-        String sql = "UPDATE PACIENTE SET"
+        String sql = "UPDATE PACIENTE SET "
                 + "CPF = ?,"
                 + "NOME = ?,"
                 + "TELEFONE = ?,"
                 + "DATA_DE_NASCIMENTO = ?,"
                 + "ENDERECO = ?,"
-                + "SEXO = ?";
+                + "SEXO = ? WHERE ID = ?";
         
         conectar();
+            
+            System.out.println(paciente);
+          
+            System.out.println(paciente.getCpf());
+            System.out.println(paciente.getNome());
+            System.out.println(paciente.getEndereco());
+            System.out.println(paciente.getTelefone());
+            System.out.println(paciente.getSexo());
+            Date dataPadraoSql2 = new Date(paciente.getDataDeNascimento().getTime());
+            System.out.println(dataPadraoSql2);
+            System.out.println(paciente.getId());
         
-        PreparedStatement pstm = conexao.prepareStatement(sql);
-        pstm.setString(1, paciente.getCpf());
-        pstm.setString(2, paciente.getNome());
-        pstm.setString(3, paciente.getTelefone());
-        Date dataPadraoSql = new Date(paciente.getDataDeNascimento().getTime());
-        pstm.setDate(4, dataPadraoSql);
-        pstm.setString(5, paciente.getEndereco());
-        pstm.setString(6, Character.toString(paciente.getSexo()));
-        pstm.execute();
-        
-        conexao.commit();
-        desconectar();
+        try {
+            PreparedStatement pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, paciente.getCpf());
+            pstm.setString(2, paciente.getNome());
+            pstm.setString(3, paciente.getTelefone());
+            Date dataPadraoSql = new Date(paciente.getDataDeNascimento().getTime());
+            pstm.setDate(4, dataPadraoSql);
+            pstm.setString(5, paciente.getEndereco());
+            pstm.setString(6, Character.toString(paciente.getSexo()));
+            pstm.setInt(7, paciente.getId());
+            pstm.execute();
+
+            conexao.commit();
+            desconectar();
+        } catch (SQLException e) {
+
+            System.out.println(e);
+        }
     }
 
     @Override

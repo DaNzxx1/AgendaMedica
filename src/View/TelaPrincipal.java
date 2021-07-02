@@ -6,6 +6,7 @@
 package View;
 
 import Controller.MedicoController;
+import Controller.PacienteController;
 import Controller.PlanoDeSaudeController;
 import Controller.UsuarioController;
 import java.sql.SQLException;
@@ -43,11 +44,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuItemCadMedico = new javax.swing.JMenuItem();
         menuItemCadPlanoSaude = new javax.swing.JMenuItem();
         menuItemCadConsulta = new javax.swing.JMenuItem();
-        menuItemCadPerfil = new javax.swing.JMenuItem();
         menuRelatorios = new javax.swing.JMenu();
         menuItemRelUsuarios = new javax.swing.JMenuItem();
         menuItemRelMedicos = new javax.swing.JMenuItem();
         menuItemRelPlano = new javax.swing.JMenuItem();
+        menuItemRelPaciente = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -116,15 +117,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastrar.add(menuItemCadConsulta);
 
-        menuItemCadPerfil.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        menuItemCadPerfil.setText("Perfil");
-        menuItemCadPerfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemCadPerfilActionPerformed(evt);
-            }
-        });
-        menuCadastrar.add(menuItemCadPerfil);
-
         menuBarPrincipal.add(menuCadastrar);
 
         menuRelatorios.setText("Relatórios");
@@ -158,6 +150,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuRelatorios.add(menuItemRelPlano);
+
+        menuItemRelPaciente.setText("Relatório de Pacientes");
+        menuItemRelPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRelPacienteActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(menuItemRelPaciente);
 
         menuBarPrincipal.add(menuRelatorios);
 
@@ -251,22 +251,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuItemCadConsultaActionPerformed
 
-    private void menuItemCadPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCadPerfilActionPerformed
-        
-        //Fecha a tela que está sendo mostrada
-        dispose();
-        
-        //Tela que se quer abrir
-        //TelaCadastroPerfil telaCadastroPerfil = new TelaCadastroPerfil();
-        
-        //Torna a tela vísivel 
-        //telaCadastroPerfil.setVisible(true);
-        
-        //Coloca a tela que está sendo aberta no centro da tela/monitor
-        //telaCadastroPerfil.setLocationRelativeTo(null);
-        
-    }//GEN-LAST:event_menuItemCadPerfilActionPerformed
-
     private void menuItemCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCadUsuarioActionPerformed
         
         //Fecha a tela que está sendo mostrada
@@ -350,6 +334,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuItemRelPlanoActionPerformed
 
+    private void menuItemRelPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRelPacienteActionPerformed
+        
+        PacienteController pacienteController = new PacienteController();
+        
+        pacienteController.gerarRelatorioPaciente();
+        
+    }//GEN-LAST:event_menuItemRelPacienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -392,10 +384,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemCadConsulta;
     private javax.swing.JMenuItem menuItemCadMedico;
     private javax.swing.JMenuItem menuItemCadPaciente;
-    private javax.swing.JMenuItem menuItemCadPerfil;
     private javax.swing.JMenuItem menuItemCadPlanoSaude;
     private javax.swing.JMenuItem menuItemCadUsuario;
     private javax.swing.JMenuItem menuItemRelMedicos;
+    private javax.swing.JMenuItem menuItemRelPaciente;
     private javax.swing.JMenuItem menuItemRelPlano;
     private javax.swing.JMenuItem menuItemRelUsuarios;
     private javax.swing.JMenu menuRelatorios;

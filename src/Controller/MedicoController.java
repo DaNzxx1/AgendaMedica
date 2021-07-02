@@ -130,12 +130,18 @@ public class MedicoController {
             
             documento.open();
             
+            Paragraph tituloDoRelatorio = new Paragraph(new Phrase(20F, "RELATÓRIO DOS MÉDICOS CADASTRADOS",
+                    FontFactory.getFont(FontFactory.HELVETICA_BOLD, 15F)));
+            tituloDoRelatorio.setAlignment(Element.ALIGN_CENTER);
+
+            documento.add(tituloDoRelatorio);
+            
             Table tabelaMedicos = new Table(6);
             tabelaMedicos.setBorder(10);
             tabelaMedicos.setBorderWidth(2);
             tabelaMedicos.setBorderColor(Color.black);
             tabelaMedicos.setPadding(2);
-            //tabelaUsuarios.setSpacing(0);
+            //tabelaMedicos.setSpacing(0);
             tabelaMedicos.setWidth(100f);
             tabelaMedicos.setWidths(new float[]{10f, 30f, 20f, 10f, 15f, 15f});
             

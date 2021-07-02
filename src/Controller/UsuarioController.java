@@ -180,6 +180,12 @@ public class UsuarioController {
             
             documento.open();
             
+            Paragraph tituloDoRelatorio = new Paragraph(new Phrase(20F, "RELATÓRIO DOS USUÁRIOS CADASTRADOS",
+                    FontFactory.getFont(FontFactory.HELVETICA_BOLD, 15F)));
+            tituloDoRelatorio.setAlignment(Element.ALIGN_CENTER);
+
+            documento.add(tituloDoRelatorio);
+            
             Table tabelaUsuarios = new Table(9);
             tabelaUsuarios.setBorder(10);
             tabelaUsuarios.setBorderWidth(2);
