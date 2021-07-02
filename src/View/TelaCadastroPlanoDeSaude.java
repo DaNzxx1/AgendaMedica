@@ -7,8 +7,11 @@ package View;
 
 import Controller.PlanoDeSaudeController;
 import Entidades.PlanoDeSaude;
+import java.awt.Component;
 import java.sql.SQLException;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
 
     PlanoDeSaudeController planoDeSaudeController = new PlanoDeSaudeController();
+    DefaultTableModel tabelaPadrao;
     DefaultTableCellRenderer renderizadorDeCelula = new DefaultTableCellRenderer();
     
     public TelaCadastroPlanoDeSaude() throws SQLException {
@@ -50,7 +54,50 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
             });
         }
         
+        tabelaPadrao = (DefaultTableModel)tabelaCadastrosPlanoDeSaude.getModel();
+        
     }
+    
+    private void atualizarTabela() throws SQLException {
+        
+        for (PlanoDeSaude planoDeSaude : planoDeSaudeController.listarTodosPlanoDeSaude()) {
+            tabelaPadrao.addRow(new Object[] {
+                planoDeSaude.getId(),
+                planoDeSaude.getCodigoPlano(),
+                planoDeSaude.getOperadora(),
+                planoDeSaude.getTelefone(),
+                planoDeSaude.getEndereco(),
+                planoDeSaude.getRegistroANS()
+            });
+        }
+    }
+    
+    private void limparFormulario() {
+        
+        for (int i = 0; i < painelDados.getComponentCount(); i++) {
+            //Varre todos os componentes do painel
+            
+            Component componente = painelDados.getComponent(i);
+            
+            if(componente instanceof JTextField) {
+                //Apaga os valores
+                JTextField field = (JTextField)componente;
+                field.setText(null);
+            }
+            
+            if(componente instanceof JFormattedTextField) {
+                //Apaga os valores
+                JFormattedTextField fieldFormated = (JFormattedTextField)componente;
+                fieldFormated.setText(null);
+            }
+        }
+    }
+
+    private void refreshTabela() throws SQLException {
+        
+        new TelaCadastroPlanoDeSaude().setVisible(true);
+        dispose();
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,6 +123,9 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
         labelBanner = new javax.swing.JLabel();
         scrollPaneTabela = new javax.swing.JScrollPane();
         tabelaCadastrosPlanoDeSaude = new javax.swing.JTable();
+        buttonAlterar = new javax.swing.JButton();
+        buttonHome = new javax.swing.JButton();
+        buttonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Plano de Saúde");
@@ -202,19 +252,51 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
             tabelaCadastrosPlanoDeSaude.getColumnModel().getColumn(5).setPreferredWidth(120);
         }
 
+        buttonAlterar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        buttonAlterar.setText("Alterar");
+        buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAlterarActionPerformed(evt);
+            }
+        });
+
+        buttonHome.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        buttonHome.setText("Home");
+        buttonHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHomeActionPerformed(evt);
+            }
+        });
+
+        buttonExcluir.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        buttonExcluir.setText("Excluir");
+        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(painelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrollPaneTabela))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(175, 175, 175)
+                                .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(painelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(scrollPaneTabela))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -225,7 +307,12 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(painelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                .addComponent(scrollPaneTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -256,6 +343,58 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_buttonCadastrarActionPerformed
+
+    private void buttonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarActionPerformed
+
+        int linhaSelecionada = -1;
+
+        linhaSelecionada = tabelaCadastrosPlanoDeSaude.getSelectedRow();
+
+        if(linhaSelecionada >= 0) {
+
+            int id = (Integer)tabelaCadastrosPlanoDeSaude.getValueAt(linhaSelecionada, 0);
+
+            try {
+                PlanoDeSaude planoDeSaudeDoBanco = planoDeSaudeController.buscarPorId(id);
+
+                planoDeSaudeController.abrirTelaAlterarPlanoDeSaude(planoDeSaudeDoBanco);
+
+                dispose();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha!");
+        }
+    }//GEN-LAST:event_buttonAlterarActionPerformed
+
+    private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed
+
+        dispose();
+        new TelaPrincipal().setVisible(true);
+    }//GEN-LAST:event_buttonHomeActionPerformed
+
+    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
+
+        int linhaSelecionada = -1;
+
+        linhaSelecionada = tabelaCadastrosPlanoDeSaude.getSelectedRow();
+
+        if(linhaSelecionada >= 0) {
+
+            int id = (Integer)tabelaCadastrosPlanoDeSaude.getValueAt(linhaSelecionada, 0);
+
+            try {
+                planoDeSaudeController.excluir(id);
+                refreshTabela();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha!");
+        }
+    }//GEN-LAST:event_buttonExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,7 +436,10 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAlterar;
     private javax.swing.JButton buttonCadastrar;
+    private javax.swing.JButton buttonExcluir;
+    private javax.swing.JButton buttonHome;
     private javax.swing.JLabel labelBanner;
     private javax.swing.JLabel labelCodigoPlano;
     private javax.swing.JLabel labelEndereco;
