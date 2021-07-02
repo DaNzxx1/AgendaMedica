@@ -26,6 +26,9 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/icon_usuario.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
               </Properties>
               <Events>
@@ -38,7 +41,7 @@
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Imagens/cadastrar_paciente.png"/>
+                  <Image iconType="3" name="/Imagens/icon_paciente.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Paciente"/>
               </Properties>
@@ -52,7 +55,7 @@
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Imagens/cadastrar_medicos.png"/>
+                  <Image iconType="3" name="/Imagens/icon_medico.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="M&#xe9;dico"/>
               </Properties>
@@ -65,6 +68,9 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/icon_plano.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Plano de Sa&#xfa;de"/>
               </Properties>
               <Events>
@@ -75,6 +81,9 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/icon_consulta.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Consulta"/>
               </Properties>
@@ -97,6 +106,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemRelUsuarios">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/icon_relatorio_usuario.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Usu&#xe1;rios"/>
               </Properties>
               <Events>
@@ -105,6 +117,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemRelMedicos">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/icon_relatorio_medico.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de M&#xe9;dicos"/>
               </Properties>
               <Events>
@@ -113,6 +128,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemRelPlano">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/icon_relatorio_plano.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Planos de Sa&#xfa;de"/>
               </Properties>
               <Events>
@@ -121,6 +139,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemRelPaciente">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/icon_relatorio_paciente.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Pacientes"/>
               </Properties>
               <Events>

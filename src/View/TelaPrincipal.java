@@ -71,6 +71,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         menuItemCadUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuItemCadUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_usuario.png"))); // NOI18N
         menuItemCadUsuario.setText("Usuário");
         menuItemCadUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +81,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastrar.add(menuItemCadUsuario);
 
         menuItemCadPaciente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        menuItemCadPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cadastrar_paciente.png"))); // NOI18N
+        menuItemCadPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_paciente.png"))); // NOI18N
         menuItemCadPaciente.setText("Paciente");
         menuItemCadPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +91,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastrar.add(menuItemCadPaciente);
 
         menuItemCadMedico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        menuItemCadMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cadastrar_medicos.png"))); // NOI18N
+        menuItemCadMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_medico.png"))); // NOI18N
         menuItemCadMedico.setText("Médico");
         menuItemCadMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +101,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastrar.add(menuItemCadMedico);
 
         menuItemCadPlanoSaude.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuItemCadPlanoSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_plano.png"))); // NOI18N
         menuItemCadPlanoSaude.setText("Plano de Saúde");
         menuItemCadPlanoSaude.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +111,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastrar.add(menuItemCadPlanoSaude);
 
         menuItemCadConsulta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuItemCadConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_consulta.png"))); // NOI18N
         menuItemCadConsulta.setText("Consulta");
         menuItemCadConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +130,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        menuItemRelUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_relatorio_usuario.png"))); // NOI18N
         menuItemRelUsuarios.setText("Relatório de Usuários");
         menuItemRelUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +139,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuRelatorios.add(menuItemRelUsuarios);
 
+        menuItemRelMedicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_relatorio_medico.png"))); // NOI18N
         menuItemRelMedicos.setText("Relatório de Médicos");
         menuItemRelMedicos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +148,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuRelatorios.add(menuItemRelMedicos);
 
+        menuItemRelPlano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_relatorio_plano.png"))); // NOI18N
         menuItemRelPlano.setText("Relatório de Planos de Saúde");
         menuItemRelPlano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +157,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuRelatorios.add(menuItemRelPlano);
 
+        menuItemRelPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_relatorio_paciente.png"))); // NOI18N
         menuItemRelPaciente.setText("Relatório de Pacientes");
         menuItemRelPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
