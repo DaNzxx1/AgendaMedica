@@ -9,8 +9,6 @@ import Controller.MedicoController;
 import Controller.PlanoDeSaudeController;
 import Controller.UsuarioController;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -345,7 +343,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void menuItemRelPlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRelPlanoActionPerformed
         PlanoDeSaudeController planoDeSaudeController = new PlanoDeSaudeController();
         
-        planoDeSaudeController.gerarRelatorioPlanoDeSaude();
+        try {
+            planoDeSaudeController.gerarRelatorioPlanoDeSaude();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_menuItemRelPlanoActionPerformed
 
     /**
