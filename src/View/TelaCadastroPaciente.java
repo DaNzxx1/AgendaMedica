@@ -89,7 +89,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
     
     private void refreshTabela() throws SQLException {
         
-        new TelaCadastroUsuario().setVisible(true);
+        new TelaCadastroPaciente().setVisible(true);
         dispose();
     }
 

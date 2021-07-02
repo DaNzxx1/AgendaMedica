@@ -63,7 +63,7 @@ public class TelaAlterarPaciente extends javax.swing.JFrame {
 
         labelBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/banner.PNG"))); // NOI18N
 
-        painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Cadastro de Paciente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Alteração de Paciente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
         labelCPF.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labelCPF.setText("CPF:");
@@ -263,6 +263,7 @@ public class TelaAlterarPaciente extends javax.swing.JFrame {
         dispose();
         
         Paciente paciente = new Paciente();
+        paciente.setId(Integer.parseInt(txtIdPaciente.getText()));
         paciente.setCpf(txtCPFformatado.getText().replace("-", "").replace(".", "").trim());
         paciente.setNome(txtNome.getText().trim());
         paciente.setEndereco(txtEndereco.getText().trim());

@@ -160,6 +160,12 @@ public class PlanoDeSaudeController {
             
             documento.open();
             
+            Paragraph tituloDoRelatorio = new Paragraph(new Phrase(20F, "RELATÓRIO DOS PLANOS DE SAÚDE CADASTRADOS",
+                    FontFactory.getFont(FontFactory.HELVETICA_BOLD, 15F)));
+            tituloDoRelatorio.setAlignment(Element.ALIGN_CENTER);
+
+            documento.add(tituloDoRelatorio);
+            
             Table tabelaPlanosDeSaude = new Table(6);
             tabelaPlanosDeSaude.setBorder(10);
             tabelaPlanosDeSaude.setBorderWidth(2);

@@ -41,6 +41,18 @@ public class PacienteDAO extends ConexaoComBancoDeDados implements InterfaceDAO 
         String sql = "DELETE FROM PACIENTE WHERE ID = ?";
         
         conectar();
+        
+            System.out.println(paciente);
+          
+            System.out.println(paciente.getCpf());
+            System.out.println(paciente.getNome());
+            System.out.println(paciente.getEndereco());
+            System.out.println(paciente.getTelefone());
+            System.out.println(paciente.getSexo());
+            Date dataPadraoSql2 = new Date(paciente.getDataDeNascimento().getTime());
+            System.out.println(dataPadraoSql2);
+            System.out.println(paciente.getId());
+             
         PreparedStatement pstm = conexao.prepareStatement(sql);
         pstm.setInt(1, paciente.getId());
         pstm.execute();
@@ -70,6 +82,7 @@ public class PacienteDAO extends ConexaoComBancoDeDados implements InterfaceDAO 
         }
         desconectar();
         
+        
         return paciente;
     }
 
@@ -86,6 +99,17 @@ public class PacienteDAO extends ConexaoComBancoDeDados implements InterfaceDAO 
                 + "SEXO = ? WHERE ID = ?";
         
         conectar();
+            
+            System.out.println(paciente);
+          
+            System.out.println(paciente.getCpf());
+            System.out.println(paciente.getNome());
+            System.out.println(paciente.getEndereco());
+            System.out.println(paciente.getTelefone());
+            System.out.println(paciente.getSexo());
+            Date dataPadraoSql2 = new Date(paciente.getDataDeNascimento().getTime());
+            System.out.println(dataPadraoSql2);
+            System.out.println(paciente.getId());
         
         try {
             PreparedStatement pstm = conexao.prepareStatement(sql);
