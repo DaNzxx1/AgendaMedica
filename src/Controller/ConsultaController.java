@@ -46,6 +46,15 @@ public class ConsultaController {
         return false;
     }
 
+    public boolean atualizarConsulta(Consulta consulta) throws SQLException, ParseException {
+        if (validarDadosDeTela(consulta)) {
+            consultaDao.atualizar(consulta);
+            System.out.println("Consulta alterada com sucesso!");
+            return true;
+        }
+        return false;
+    }
+
     private boolean validarDadosDeTela(Consulta consulta) throws SQLException, ParseException {
 
         //Regra 01 - SALA NÃO PODE SER NULO OU SEM PREENCHIMENTO
@@ -89,6 +98,7 @@ public class ConsultaController {
 
         if (mensagensDeErro.length() != 0) {
             JOptionPane.showMessageDialog(null, mensagensDeErro.toString());
+            mensagensDeErro.setLength(0);// limpa mensagem após mostrá-la
             return false;
         }
 

@@ -14,15 +14,12 @@ import Persistencia.ConsultaDAO;
 import Persistencia.MedicoDAO;
 import Persistencia.PacienteDAO;
 import Persistencia.PlanoDeSaudeDAO;
-import java.awt.Component;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.ComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -34,6 +31,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Pedro Paul
  */
 public class TelaCadastroConsulta extends javax.swing.JFrame {
+
+    int idConsulta;
 
     ConsultaDAO consultaDAO = new ConsultaDAO();
     MedicoDAO medicoDAO = new MedicoDAO();
@@ -332,6 +331,7 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
 
         Consulta consulta = new Consulta();
+        consulta.setId(idConsulta);
         consulta.setSala(txtSala.getText().trim());
         consulta.setPlano((PlanoDeSaude) comboBoxPlano.getSelectedItem());
         consulta.setPaciente((Paciente) comboBoxPaciente.getSelectedItem());
@@ -341,13 +341,22 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
             consulta.setDataDaConsulta(sdfData.parse(txtDataConsulta.getText()));
             consulta.setHoraDaConsulta(txtHoraConsulta.getText());
 
-            if (consultaController.cadastrarConsulta(consulta)) {
-                JOptionPane.showMessageDialog(null, "Consulta cadastrado com Sucesso!");
-
+            if (idConsulta > 0) {
+                consultaController.atualizarConsulta(consulta);
+                JOptionPane.showMessageDialog(null, "Consulta alterada com Sucesso!");
                 dispose();
                 TelaPrincipal telaPrincipal = new TelaPrincipal();
                 telaPrincipal.setVisible(true);
                 telaPrincipal.setLocationRelativeTo(null);
+            } else {
+                if (consultaController.cadastrarConsulta(consulta)) {
+                    JOptionPane.showMessageDialog(null, "Consulta cadastrado com Sucesso!");
+
+                    dispose();
+                    TelaPrincipal telaPrincipal = new TelaPrincipal();
+                    telaPrincipal.setVisible(true);
+                    telaPrincipal.setLocationRelativeTo(null);
+                }
             }
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "A data da consulta deve ser preenchida");
@@ -362,9 +371,9 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
         linhaSelecionada = tabelaCadastrosConsultas.getSelectedRow();
 
         if (linhaSelecionada >= 0) {
-            int idConsulta = (Integer) tabelaCadastrosConsultas.getValueAt(linhaSelecionada, 0);
+            int idConsultaDoBanco = (Integer) tabelaCadastrosConsultas.getValueAt(linhaSelecionada, 0);
             try {
-                consultaDAO.deletar(consultaDAO.buscarPorId(idConsulta));
+                consultaDAO.deletar(consultaDAO.buscarPorId(idConsultaDoBanco));
                 refreshTabela();
             } catch (SQLException ex) {
                 System.out.println(ex);
@@ -380,9 +389,9 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
         linhaSelecionada = tabelaCadastrosConsultas.getSelectedRow();
 
         if (linhaSelecionada >= 0) {
-            int idUsuario = (Integer) tabelaCadastrosConsultas.getValueAt(linhaSelecionada, 0);
+            int idConsultaDoBanco = (Integer) tabelaCadastrosConsultas.getValueAt(linhaSelecionada, 0);
             try {
-                Consulta consultaDoBanco = (Consulta) consultaDAO.buscarPorId(idUsuario);
+                Consulta consultaDoBanco = (Consulta) consultaDAO.buscarPorId(idConsultaDoBanco);
                 atualizarTelaCadastroConsulta(consultaDoBanco);
             } catch (SQLException ex) {
                 System.out.println(ex);
@@ -459,6 +468,7 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
     }
 
     private void atualizarTelaCadastroConsulta(Consulta consultaDoBanco) throws SQLException {
+        idConsulta = consultaDoBanco.getId();
         txtSala.setText(consultaDoBanco.getSala());
         txtDataConsulta.setText(sdfData.format(consultaDoBanco.getDataDaConsulta()));
         txtHoraConsulta.setText(consultaDoBanco.getHoraDaConsulta());

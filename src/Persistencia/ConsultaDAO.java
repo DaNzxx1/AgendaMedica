@@ -87,13 +87,14 @@ public class ConsultaDAO extends ConexaoComBancoDeDados implements InterfaceDAO 
     public void atualizar(Object entidade) throws SQLException {
         Consulta consulta = (Consulta) entidade;
 
-        String sql = "UPDATE CONSULTA SET"
-                + "ID_PLANO = ?,"
-                + "ID_PACIENTE = ?,"
-                + "CRM_MEDICO = ?,"
-                + "SALA = ?,"
-                + "DATA_DA_CONSULTA = ?,"
-                + "HORA_DA_CONSULTA = ?";
+        String sql = "UPDATE CONSULTA "
+                + "SET ID_PLANO         = ?, "
+                + "    ID_PACIENTE      = ?, "
+                + "    CRM_MEDICO       = ?, "
+                + "    SALA             = ?, "
+                + "    DATA_DA_CONSULTA = ?, "
+                + "    HORA_DA_CONSULTA = ? "
+                + "where ID = ? ";
 
         conectar();
 
@@ -105,6 +106,7 @@ public class ConsultaDAO extends ConexaoComBancoDeDados implements InterfaceDAO 
         Date dataPadraoSql = new Date(consulta.getDataDaConsulta().getTime());
         pstm.setDate(5, dataPadraoSql);
         pstm.setString(6, consulta.getHoraDaConsulta());
+        pstm.setInt(7, consulta.getId());
         pstm.execute();
 
         conexao.commit();
