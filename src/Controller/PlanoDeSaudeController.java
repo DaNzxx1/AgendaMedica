@@ -2,6 +2,7 @@ package Controller;
 
 import Entidades.PlanoDeSaude;
 import Persistencia.PlanoDeSaudeDAO;
+import View.TelaAlterarPlanoDeSaude;
 import com.lowagie.text.Cell;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -28,11 +29,7 @@ public class PlanoDeSaudeController {
     PlanoDeSaudeDAO planoDeSaudeDao = new PlanoDeSaudeDAO();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
-    public List<PlanoDeSaude> listarTodosPlanoDeSaude() throws SQLException {
 
-        return planoDeSaudeDao.listarTodos();
-
-    }
     
     public boolean cadastrarPlanoDeSaude(PlanoDeSaude planoDeSaude) throws SQLException {
         
@@ -147,7 +144,7 @@ public class PlanoDeSaudeController {
         return true;
     }
     
-        public void gerarRelatorioPlanoDeSaude() {
+        public void gerarRelatorioPlanoDeSaude() throws SQLException {
         
         //Instancia do documento e definindo o tamanha dela
         Document documento = new Document(PageSize.A4.rotate());
@@ -221,7 +218,7 @@ public class PlanoDeSaudeController {
 
             }
             
-            for(PlanoDeSaude planoDeSaude : listarTodosPlanosDeSaude()) {
+            for(PlanoDeSaude planoDeSaude : listarTodosPlanoDeSaude()) {
                 paragrafoId = new Paragraph(new Phrase(15F, ""+ planoDeSaude.getId(),
                     FontFactory.getFont(FontFactory.HELVETICA, 9F)));
                 paragrafoId.setAlignment(Element.ALIGN_CENTER);
@@ -284,16 +281,41 @@ public class PlanoDeSaudeController {
             System.out.println(ex);
         } catch (IOException ex) {
             System.out.println(ex);
-        } catch (SQLException ex) {
-            System.out.println(ex);
         }        
     }
-        
-    private List<PlanoDeSaude> listarTodosPlanosDeSaude() throws SQLException {
+    public List<PlanoDeSaude> listarTodosPlanoDeSaude()  throws SQLException {
         return planoDeSaudeDao.listarTodos();
-    }
-
+    }    
+    
     public void alterarPlanoDeSaude(PlanoDeSaude planoDeSaude) throws SQLException {
         planoDeSaudeDao.atualizar(planoDeSaude);
     }
+
+    public PlanoDeSaude buscarPorId(int id) throws SQLException {
+        return (PlanoDeSaude) planoDeSaudeDao.buscarPorId(id);
+    }
+    
+    public void excluir(int id) throws SQLException {
+        planoDeSaudeDao.deletar(planoDeSaudeDao.buscarPorId(id));
+    }
+    
+    private void apresentarPoUp() throws SQLException {
+        JOptionPane.showMessageDialog(null, mensagensDeErro.toString());
+    }
+    
+    public void abrirTelaAlterarPlanoDeSaude(PlanoDeSaude planoDeSaude) throws SQLException{
+                
+        TelaAlterarPlanoDeSaude telaAlterarPlanoDeSaude = new TelaAlterarPlanoDeSaude();
+        telaAlterarPlanoDeSaude.txtId.setText(String.valueOf(planoDeSaude.getId()));
+        telaAlterarPlanoDeSaude.txtCodigoPlano.setText(planoDeSaude.getCodigoPlano());
+        telaAlterarPlanoDeSaude.txtOperadora.setText(planoDeSaude.getOperadora());
+        telaAlterarPlanoDeSaude.txtTelefone.setText(planoDeSaude.getTelefone());
+        telaAlterarPlanoDeSaude.txtEndereco.setText(planoDeSaude.getEndereco());
+        telaAlterarPlanoDeSaude.txtRegistroAns.setText(planoDeSaude.getRegistroANS());
+        
+        telaAlterarPlanoDeSaude.setVisible(true);
+        
+    }
+
+    
 }
