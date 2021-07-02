@@ -109,6 +109,22 @@ public class BuildDeTabelas extends ConexaoComBancoDeDados {
             + "('BRA81', 'BRADESCO', '987774566', 'AVENIDA CENTRAL AE 19 LOTE A APARTAMENTO 102 AREAL - DF', 'ANS00141'),"
             + "('SUL67', 'SUL-AMÉRICA', '36554766', 'QSF 87 CASA 65 TAGUATINGA SUL - DF', 'ANS00143');";
     
+    private final String insertUsuario = "insert into USUARIO "
+        + "(CPF, NOME, USERNAME, SENHA, CODIGO_PERFIL, TELEFONE, MATRICULA, DATA_NASCIMENTO) values "
+        + "('97310044320', 'Pedro Paul', 'ppaul', '12345', 101, '61995407997', "
+        + "NEXT VALUE FOR MATRICULA_SEQ, '1989-05-22'), "
+        + "('17526640517', 'Eduarda Manuela Nascimento', 'eduardam', '12345', 102, '21983746203', "
+        + "NEXT VALUE FOR MATRICULA_SEQ, '1987-12-07'), "
+        + "('79543174474', 'Lorenzo Benedito Diogo Bernardes', 'lorenzob', '12345', 102, '61997801499', "
+        + "NEXT VALUE FOR MATRICULA_SEQ, '1979-05-24'), "
+        + "('86067106019', 'Carolina Andrea da Conceição', 'carolina', '12345', 102, '22998865835', "
+        + "NEXT VALUE FOR MATRICULA_SEQ, '1961-01-21'), "
+        + "('45500436600', 'Tiago Vicente Corte Real', 'tiagovic', '12345', 102, '98992205051', "
+        + "NEXT VALUE FOR MATRICULA_SEQ, '1997-02-26'), "
+        + "('77707203380', 'Laís Natália Regina da Rosa', 'laisnata', '12345', 102, '62981473250', "
+        + "NEXT VALUE FOR MATRICULA_SEQ, '1985-04-10'); ";// #endregion
+
+    
     public void construirTabelas() throws SQLException {
         executarScript(tabelaPerfil);
         System.out.println("Tabela Perfil Criada com sucesso");
@@ -149,5 +165,8 @@ public class BuildDeTabelas extends ConexaoComBancoDeDados {
         
         executarScript(insertConsulta);
         System.out.println("Dados de Consulta inseridos com sucesso");
+
+        executarScript(insertUsuario);
+        System.out.println("Dados de usuário inseridos");
     }
 }
