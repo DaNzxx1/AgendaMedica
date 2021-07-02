@@ -122,7 +122,7 @@ public class BuildDeTabelas extends ConexaoComBancoDeDados {
         + "('45500436600', 'Tiago Vicente Corte Real', 'tiagovic', '12345', 102, '98992205051', "
         + "NEXT VALUE FOR MATRICULA_SEQ, '1997-02-26'), "
         + "('77707203380', 'Laís Natália Regina da Rosa', 'laisnata', '12345', 102, '62981473250', "
-        + "NEXT VALUE FOR MATRICULA_SEQ, '1985-04-10'); ";// #endregion
+        + "NEXT VALUE FOR MATRICULA_SEQ, '1985-04-10'); ";
 
     
     public void construirTabelas() throws SQLException {
@@ -163,10 +163,10 @@ public class BuildDeTabelas extends ConexaoComBancoDeDados {
         executarScript(insertPlanoDeSaude);
         System.out.println("Dados de PlanoDeSaude inseridos com sucesso");
         
-        executarScript(insertConsulta);
-        System.out.println("Dados de Consulta inseridos com sucesso");
-
         executarScript(insertUsuario);
         System.out.println("Dados de usuário inseridos");
+
+        executarScript(insertConsulta);
+        System.out.println("Dados de Consulta inseridos com sucesso");
     }
 }

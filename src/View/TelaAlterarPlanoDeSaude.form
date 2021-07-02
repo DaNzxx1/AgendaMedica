@@ -61,7 +61,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Formul&#xe1;rio de Cadastro do Plano de Sa&#xfa;de">
+            <TitledBorder title="Formul&#xe1;rio de Alterar do Plano de Sa&#xfa;de">
               <Font PropertyName="font" name="Tahoma" size="18" style="0"/>
             </TitledBorder>
           </Border>

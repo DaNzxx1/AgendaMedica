@@ -121,6 +121,7 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
         tabelaCadastrosConsultas = new javax.swing.JTable();
         buttonExcluir = new javax.swing.JButton();
         buttonAlterar = new javax.swing.JButton();
+        buttonHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Consulta");
@@ -262,13 +263,20 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
         tabelaCadastrosConsultas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         scrollPaneTabela.setViewportView(tabelaCadastrosConsultas);
         if (tabelaCadastrosConsultas.getColumnModel().getColumnCount() > 0) {
-            tabelaCadastrosConsultas.getColumnModel().getColumn(0).setPreferredWidth(30);
-            tabelaCadastrosConsultas.getColumnModel().getColumn(1).setPreferredWidth(80);
-            tabelaCadastrosConsultas.getColumnModel().getColumn(2).setPreferredWidth(140);
-            tabelaCadastrosConsultas.getColumnModel().getColumn(3).setPreferredWidth(140);
-            tabelaCadastrosConsultas.getColumnModel().getColumn(4).setPreferredWidth(30);
-            tabelaCadastrosConsultas.getColumnModel().getColumn(5).setPreferredWidth(100);
-            tabelaCadastrosConsultas.getColumnModel().getColumn(6).setPreferredWidth(100);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(0).setResizable(false);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(1).setResizable(false);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(1).setPreferredWidth(120);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(2).setResizable(false);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(3).setResizable(false);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(3).setPreferredWidth(150);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(4).setResizable(false);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(5).setResizable(false);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(5).setPreferredWidth(120);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(6).setResizable(false);
+            tabelaCadastrosConsultas.getColumnModel().getColumn(6).setPreferredWidth(120);
         }
 
         buttonExcluir.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -284,6 +292,14 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
         buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAlterarActionPerformed(evt);
+            }
+        });
+
+        buttonHome.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        buttonHome.setText("Home");
+        buttonHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHomeActionPerformed(evt);
             }
         });
 
@@ -306,23 +322,27 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
                 .addGap(130, 130, 130)
                 .addComponent(buttonExcluir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
                 .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(187, 187, 187))
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelBanner)
-                .addGap(18, 18, 18)
+                .addComponent(labelBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(painelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPaneTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(buttonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -401,6 +421,12 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonAlterarActionPerformed
 
+    private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed
+
+        dispose();
+        new TelaPrincipal().setVisible(true);
+    }//GEN-LAST:event_buttonHomeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -444,6 +470,7 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
     private javax.swing.JButton buttonAlterar;
     private javax.swing.JButton buttonCadastrar;
     private javax.swing.JButton buttonExcluir;
+    private javax.swing.JButton buttonHome;
     private javax.swing.JComboBox<Medico> comboBoxMedico;
     private javax.swing.JComboBox<Paciente> comboBoxPaciente;
     private javax.swing.JComboBox<PlanoDeSaude> comboBoxPlano;

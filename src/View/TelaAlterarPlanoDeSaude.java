@@ -57,7 +57,7 @@ public class TelaAlterarPlanoDeSaude extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/banner.PNG"))); // NOI18N
         jLabel1.setText("jLabel1");
 
-        painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Cadastro do Plano de Saúde", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Alterar do Plano de Saúde", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
         labelCodigoPlano.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labelCodigoPlano.setText("CÓDIGO PLANO:");
@@ -206,7 +206,7 @@ public class TelaAlterarPlanoDeSaude extends javax.swing.JFrame {
 
         try {
             planoDeSaudeController.alterarPlanoDeSaude(planoDeSaude);
-            JOptionPane.showMessageDialog(null, "Médico alterado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Plano de Saúde alterado com Sucesso!");
             new TelaPrincipal().setVisible(true);
         } catch (SQLException ex) {
             System.out.println(ex);

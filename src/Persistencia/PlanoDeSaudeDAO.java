@@ -73,12 +73,13 @@ public class PlanoDeSaudeDAO extends ConexaoComBancoDeDados implements Interface
     public void atualizar(Object entidade) throws SQLException {
         PlanoDeSaude planoDeSaude = (PlanoDeSaude)entidade;
         
-        String sql = "UPDATE PLANODESAUDE SET"
+        String sql = "UPDATE PLANODESAUDE SET "
                 + "CODIGO_PLANO = ?,"
                 + "OPERADORA = ?,"
                 + "TELEFONE = ?,"
                 + "ENDERECO = ?,"
-                + "REGISTRO_ANS = ?";
+                + "REGISTRO_ANS = ?"
+                + "where id = ?";
         
         conectar();
         
@@ -88,6 +89,7 @@ public class PlanoDeSaudeDAO extends ConexaoComBancoDeDados implements Interface
         pstm.setString(3, planoDeSaude.getTelefone());
         pstm.setString(4, planoDeSaude.getEndereco());
         pstm.setString(5, planoDeSaude.getRegistroANS());
+        pstm.setInt(6, planoDeSaude.getId());
         pstm.execute();
         
         conexao.commit();
