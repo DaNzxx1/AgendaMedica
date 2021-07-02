@@ -10,11 +10,19 @@ import Entidades.Consulta;
 import Entidades.Medico;
 import Entidades.Paciente;
 import Entidades.PlanoDeSaude;
+import Persistencia.ConsultaDAO;
+import Persistencia.MedicoDAO;
+import Persistencia.PacienteDAO;
+import Persistencia.PlanoDeSaudeDAO;
+import java.awt.Component;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.ComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -23,55 +31,67 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Danilo
+ * @author Pedro Paul
  */
 public class TelaCadastroConsulta extends javax.swing.JFrame {
-    
+
+    ConsultaDAO consultaDAO = new ConsultaDAO();
+    MedicoDAO medicoDAO = new MedicoDAO();
+    PacienteDAO pacienteDAO = new PacienteDAO();
+    PlanoDeSaudeDAO planoDAO = new PlanoDeSaudeDAO();
+
     ConsultaController consultaController = new ConsultaController();
     SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
+    DateTimeFormatter dtfData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
+    DateTimeFormatter dtfHora = DateTimeFormatter.ofPattern("HH:mm");
     DefaultTableCellRenderer renderizadorDeCelula = new DefaultTableCellRenderer();
 
     public TelaCadastroConsulta() throws SQLException {
-        
+
         initComponents();
-        
+
+        txtDataConsulta.setText(LocalDate.now().format(dtfData));
+        txtHoraConsulta.setText(LocalTime.now().format(dtfHora));
+
         setLocationRelativeTo(null);
-        
+
         renderizadorDeCelula.setHorizontalAlignment(SwingConstants.CENTER);
-        
+
         tabelaCadastrosConsultas.getTableHeader().setDefaultRenderer(renderizadorDeCelula);
-        
-        for(int i = 0; i < tabelaCadastrosConsultas.getColumnCount(); i++) {
-            if(i != 2 && i != 3)
+
+        for (int i = 0; i < tabelaCadastrosConsultas.getColumnCount(); i++) {
+            if (i != 2 && i != 3) {
                 tabelaCadastrosConsultas.getColumnModel().getColumn(i).setCellRenderer(renderizadorDeCelula);
+            }
         }
-        
-        for(PlanoDeSaude planoDeSaude : consultaController.listarTodosPlanoDeSaude()) {
+
+        for (PlanoDeSaude planoDeSaude : consultaController.listarTodosPlanoDeSaude()) {
             comboBoxPlano.addItem(planoDeSaude);
         }
-        
-        for(Paciente paciente : consultaController.listarTodosPacientes()) {
+
+        for (Paciente paciente : consultaController.listarTodosPacientes()) {
             comboBoxPaciente.addItem(paciente);
         }
-        
-        for(Medico medico : consultaController.listarTodosMedicos()) {
+
+        for (Medico medico : consultaController.listarTodosMedicos()) {
             comboBoxMedico.addItem(medico);
         }
-        
-        DefaultTableModel tabelaPadrao = (DefaultTableModel)tabelaCadastrosConsultas.getModel();
-        
-        for(Consulta consulta : consultaController.listarTodasConsultas()) {
-            tabelaPadrao.addRow(new Object[] {
+
+        DefaultTableModel tabelaPadrao = (DefaultTableModel) tabelaCadastrosConsultas.getModel();
+
+        for (Consulta consulta : consultaController.listarTodasConsultas()) {
+            tabelaPadrao.addRow(new Object[]{
                 consulta.getId(),
                 consulta.getPlano().toString(),
                 consulta.getPaciente().toString(),
                 consulta.getMedico().toString(),
                 consulta.getSala(),
                 sdfData.format(consulta.getDataDaConsulta()),
-                //sdfHora.format(consulta.getHoraDaConsulta())
+                consulta.getHoraDaConsulta()
             });
         }
-        
+
     }
 
     /**
@@ -100,12 +120,14 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
         labelBanner = new javax.swing.JLabel();
         scrollPaneTabela = new javax.swing.JScrollPane();
         tabelaCadastrosConsultas = new javax.swing.JTable();
+        buttonExcluir = new javax.swing.JButton();
+        buttonAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Consulta");
         setResizable(false);
 
-        painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Cadastro da Consulta", 0, 0, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Cadastro da Consulta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
         labelSala.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labelSala.setText("SALA:");
@@ -185,9 +207,7 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
                         .addComponent(labelPaciente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboBoxPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(149, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelDadosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(buttonCadastrar)
                 .addContainerGap())
         );
@@ -213,12 +233,11 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
                     .addComponent(labelHoraConsulta)
                     .addComponent(txtHoraConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(painelDadosLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
+                        .addGap(1, 1, 1)
                         .addGroup(painelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(comboBoxMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMedico))
-                        .addGap(25, 25, 25)
-                        .addComponent(buttonCadastrar)))
+                            .addComponent(labelMedico)
+                            .addComponent(buttonCadastrar))))
                 .addContainerGap())
         );
 
@@ -253,6 +272,22 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
             tabelaCadastrosConsultas.getColumnModel().getColumn(6).setPreferredWidth(100);
         }
 
+        buttonExcluir.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        buttonExcluir.setText("EXCLUIR");
+        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExcluirActionPerformed(evt);
+            }
+        });
+
+        buttonAlterar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        buttonAlterar.setText("ALTERAR");
+        buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -268,6 +303,12 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
                             .addComponent(painelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(scrollPaneTabela))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(buttonExcluir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(187, 187, 187))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,8 +318,12 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(painelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(scrollPaneTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -288,15 +333,15 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
 
         Consulta consulta = new Consulta();
         consulta.setSala(txtSala.getText().trim());
-        consulta.setPlano((PlanoDeSaude)comboBoxPlano.getSelectedItem());
-        consulta.setPaciente((Paciente)comboBoxPaciente.getSelectedItem());
-        consulta.setMedico((Medico)comboBoxMedico.getSelectedItem());
+        consulta.setPlano((PlanoDeSaude) comboBoxPlano.getSelectedItem());
+        consulta.setPaciente((Paciente) comboBoxPaciente.getSelectedItem());
+        consulta.setMedico((Medico) comboBoxMedico.getSelectedItem());
 
         try {
             consulta.setDataDaConsulta(sdfData.parse(txtDataConsulta.getText()));
             consulta.setHoraDaConsulta(txtHoraConsulta.getText());
-            
-            if(consultaController.cadastrarConsulta(consulta)) {
+
+            if (consultaController.cadastrarConsulta(consulta)) {
                 JOptionPane.showMessageDialog(null, "Consulta cadastrado com Sucesso!");
 
                 dispose();
@@ -305,11 +350,47 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
                 telaPrincipal.setLocationRelativeTo(null);
             }
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "A data de nascimento deve ser preenchida");
+            JOptionPane.showMessageDialog(null, "A data da consulta deve ser preenchida");
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }//GEN-LAST:event_buttonCadastrarActionPerformed
+
+    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
+        int linhaSelecionada = -1;
+
+        linhaSelecionada = tabelaCadastrosConsultas.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            int idConsulta = (Integer) tabelaCadastrosConsultas.getValueAt(linhaSelecionada, 0);
+            try {
+                consultaDAO.deletar(consultaDAO.buscarPorId(idConsulta));
+                refreshTabela();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha");
+        }
+    }//GEN-LAST:event_buttonExcluirActionPerformed
+
+    private void buttonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarActionPerformed
+        int linhaSelecionada = -1;
+
+        linhaSelecionada = tabelaCadastrosConsultas.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            int idUsuario = (Integer) tabelaCadastrosConsultas.getValueAt(linhaSelecionada, 0);
+            try {
+                Consulta consultaDoBanco = (Consulta) consultaDAO.buscarPorId(idUsuario);
+                atualizarTelaCadastroConsulta(consultaDoBanco);
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha");
+        }
+    }//GEN-LAST:event_buttonAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -351,7 +432,9 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAlterar;
     private javax.swing.JButton buttonCadastrar;
+    private javax.swing.JButton buttonExcluir;
     private javax.swing.JComboBox<Medico> comboBoxMedico;
     private javax.swing.JComboBox<Paciente> comboBoxPaciente;
     private javax.swing.JComboBox<PlanoDeSaude> comboBoxPlano;
@@ -369,4 +452,42 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtHoraConsulta;
     private javax.swing.JTextField txtSala;
     // End of variables declaration//GEN-END:variables
+
+    private void refreshTabela() throws SQLException {
+        new TelaCadastroConsulta().setVisible(true);
+        dispose();
+    }
+
+    private void atualizarTelaCadastroConsulta(Consulta consultaDoBanco) throws SQLException {
+        txtSala.setText(consultaDoBanco.getSala());
+        txtDataConsulta.setText(sdfData.format(consultaDoBanco.getDataDaConsulta()));
+        txtHoraConsulta.setText(consultaDoBanco.getHoraDaConsulta());
+
+        Medico medicoDoBanco = consultaDoBanco.getMedico();
+        for (int i = 0; i < comboBoxMedico.getItemCount(); i++) {
+            Medico medicoTela = comboBoxMedico.getItemAt(i);
+            if (medicoTela.getCRM() == medicoDoBanco.getCRM()) {
+                comboBoxMedico.setSelectedIndex(i);
+                break;
+            }
+        }
+        Paciente pacienteDoBanco = consultaDoBanco.getPaciente();
+        for (int i = 0; i < comboBoxPaciente.getItemCount(); i++) {
+            Paciente pacienteDaTela = comboBoxPaciente.getItemAt(i);
+            if (pacienteDaTela.getId() == pacienteDoBanco.getId()) {
+                comboBoxPaciente.setSelectedIndex(i);
+                break;
+            }
+        }
+        PlanoDeSaude planoDoBanco = consultaDoBanco.getPlano();
+        for (int i = 0; i < comboBoxPlano.getItemCount(); i++) {
+            PlanoDeSaude planoDaTela = comboBoxPlano.getItemAt(i);
+            if (planoDaTela.getId() == planoDoBanco.getId()) {
+                comboBoxPlano.setSelectedIndex(i);
+                break;
+            }
+        }
+
+    }
+
 }
