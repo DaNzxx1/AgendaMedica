@@ -77,28 +77,34 @@ public class PacienteDAO extends ConexaoComBancoDeDados implements InterfaceDAO 
     public void atualizar(Object entidade) throws SQLException {
         Paciente paciente = (Paciente)entidade;
         
-        String sql = "UPDATE PACIENTE SET"
+        String sql = "UPDATE PACIENTE SET "
                 + "CPF = ?,"
                 + "NOME = ?,"
                 + "TELEFONE = ?,"
                 + "DATA_DE_NASCIMENTO = ?,"
                 + "ENDERECO = ?,"
-                + "SEXO = ?";
+                + "SEXO = ? WHERE ID = ?";
         
         conectar();
         
-        PreparedStatement pstm = conexao.prepareStatement(sql);
-        pstm.setString(1, paciente.getCpf());
-        pstm.setString(2, paciente.getNome());
-        pstm.setString(3, paciente.getTelefone());
-        Date dataPadraoSql = new Date(paciente.getDataDeNascimento().getTime());
-        pstm.setDate(4, dataPadraoSql);
-        pstm.setString(5, paciente.getEndereco());
-        pstm.setString(6, Character.toString(paciente.getSexo()));
-        pstm.execute();
-        
-        conexao.commit();
-        desconectar();
+        try {
+            PreparedStatement pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, paciente.getCpf());
+            pstm.setString(2, paciente.getNome());
+            pstm.setString(3, paciente.getTelefone());
+            Date dataPadraoSql = new Date(paciente.getDataDeNascimento().getTime());
+            pstm.setDate(4, dataPadraoSql);
+            pstm.setString(5, paciente.getEndereco());
+            pstm.setString(6, Character.toString(paciente.getSexo()));
+            pstm.setInt(7, paciente.getId());
+            pstm.execute();
+
+            conexao.commit();
+            desconectar();
+        } catch (SQLException e) {
+
+            System.out.println(e);
+        }
     }
 
     @Override

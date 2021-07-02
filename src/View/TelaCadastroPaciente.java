@@ -7,12 +7,15 @@ package View;
 
 import Controller.PacienteController;
 import Entidades.Paciente;
+import java.awt.Component;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +28,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
 
     PacienteController pacienteController = new PacienteController();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    DefaultTableModel tabelaPadrao;
     DefaultTableCellRenderer renderizadorDeCelula = new DefaultTableCellRenderer();
     
     public TelaCadastroPaciente() throws SQLException {
@@ -37,25 +41,56 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         
         tabelaCadastrosPacientes.getTableHeader().setDefaultRenderer(renderizadorDeCelula);
         
-        DefaultTableModel tabelaPadrao = (DefaultTableModel)tabelaCadastrosPacientes.getModel();
-        
         for(int i = 0; i < tabelaCadastrosPacientes.getColumnCount(); i++) {
             if(i != 2 && i != 5)
                 tabelaCadastrosPacientes.getColumnModel().getColumn(i).setCellRenderer(renderizadorDeCelula);
         }
+        
+        tabelaPadrao = (DefaultTableModel)tabelaCadastrosPacientes.getModel();
+        
+        atualizarTabela();
+    }
+    
+    public void atualizarTabela() throws SQLException {
         
         for(Paciente paciente : pacienteController.listarTodosPacientes()) {
             tabelaPadrao.addRow(new Object[] {
                 paciente.getId(),
                 paciente.getCpf(),
                 paciente.getNome(),
+                paciente.getSexo(),
                 paciente.getTelefone(),
-                sdf.format(paciente.getDataDeNascimento()),
                 paciente.getEndereco(),
-                paciente.getSexo()
+                sdf.format(paciente.getDataDeNascimento())
             });
         }
+    }
+    
+    private void limparFormulario() {
         
+        for (int i = 0; i < painelDados.getComponentCount(); i++) {
+            //Varre todos os componentes do painel
+            
+            Component componente = painelDados.getComponent(i);
+            
+            if(componente instanceof JTextField) {
+                //Apaga os valores
+                JTextField field = (JTextField)componente;
+                field.setText(null);
+            }
+            
+            if(componente instanceof JFormattedTextField) {
+                //Apaga os valores
+                JFormattedTextField fieldFormated = (JFormattedTextField)componente;
+                fieldFormated.setText(null);
+            }
+        }
+    }
+    
+    private void refreshTabela() throws SQLException {
+        
+        new TelaCadastroUsuario().setVisible(true);
+        dispose();
     }
 
     /**
@@ -87,12 +122,15 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         labelBanner = new javax.swing.JLabel();
         scrollPaneTabela = new javax.swing.JScrollPane();
         tabelaCadastrosPacientes = new javax.swing.JTable();
+        buttonAlterar = new javax.swing.JButton();
+        buttonHome = new javax.swing.JButton();
+        buttonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Paciente");
         setResizable(false);
 
-        painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Cadastro de Paciente", 0, 0, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Cadastro de Paciente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
         labelCPF.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labelCPF.setText("CPF:");
@@ -246,7 +284,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "CPF", "NOME", "TELEFONE", "DATA DE NASCIMENTO", "ENDEREÇO", "SEXO"
+                "ID", "CPF", "NOME", "SEXO", "TELEFONE", "ENDEREÇO", "DATA DE NASCIMENTO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -261,20 +299,44 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         scrollPaneTabela.setViewportView(tabelaCadastrosPacientes);
         if (tabelaCadastrosPacientes.getColumnModel().getColumnCount() > 0) {
             tabelaCadastrosPacientes.getColumnModel().getColumn(0).setResizable(false);
-            tabelaCadastrosPacientes.getColumnModel().getColumn(0).setPreferredWidth(25);
+            tabelaCadastrosPacientes.getColumnModel().getColumn(0).setPreferredWidth(30);
             tabelaCadastrosPacientes.getColumnModel().getColumn(1).setResizable(false);
-            tabelaCadastrosPacientes.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tabelaCadastrosPacientes.getColumnModel().getColumn(1).setPreferredWidth(90);
             tabelaCadastrosPacientes.getColumnModel().getColumn(2).setResizable(false);
-            tabelaCadastrosPacientes.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tabelaCadastrosPacientes.getColumnModel().getColumn(2).setPreferredWidth(180);
             tabelaCadastrosPacientes.getColumnModel().getColumn(3).setResizable(false);
-            tabelaCadastrosPacientes.getColumnModel().getColumn(3).setPreferredWidth(120);
+            tabelaCadastrosPacientes.getColumnModel().getColumn(3).setPreferredWidth(40);
             tabelaCadastrosPacientes.getColumnModel().getColumn(4).setResizable(false);
-            tabelaCadastrosPacientes.getColumnModel().getColumn(4).setPreferredWidth(150);
+            tabelaCadastrosPacientes.getColumnModel().getColumn(4).setPreferredWidth(110);
             tabelaCadastrosPacientes.getColumnModel().getColumn(5).setResizable(false);
             tabelaCadastrosPacientes.getColumnModel().getColumn(5).setPreferredWidth(200);
             tabelaCadastrosPacientes.getColumnModel().getColumn(6).setResizable(false);
-            tabelaCadastrosPacientes.getColumnModel().getColumn(6).setPreferredWidth(40);
+            tabelaCadastrosPacientes.getColumnModel().getColumn(6).setPreferredWidth(140);
         }
+
+        buttonAlterar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        buttonAlterar.setText("Alterar");
+        buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAlterarActionPerformed(evt);
+            }
+        });
+
+        buttonHome.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        buttonHome.setText("Home");
+        buttonHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHomeActionPerformed(evt);
+            }
+        });
+
+        buttonExcluir.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        buttonExcluir.setText("Excluir");
+        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -284,12 +346,20 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(scrollPaneTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(painelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(57, 57, 57))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 119, 119)
+                .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(118, 118, 118)
+                .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,8 +369,13 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(painelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addComponent(scrollPaneTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -327,7 +402,8 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             
             if(pacienteController.cadastrarPaciente(paciente)) {
                 JOptionPane.showMessageDialog(null, "Paciente cadastrado com Sucesso!");
-
+                limparFormulario();
+                refreshTabela();
                 dispose();
                 TelaPrincipal telaPrincipal = new TelaPrincipal();
                 telaPrincipal.setVisible(true);
@@ -335,7 +411,17 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             }
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "A data de nascimento deve ser preenchida");
+            try {
+                refreshTabela();
+            } catch (SQLException ex1) {
+                System.out.println(ex1);
+            }
         } catch (SQLException ex) {
+            try {
+                refreshTabela();
+            } catch (SQLException ex1) {
+                System.out.println(ex1);
+            }
             System.out.println(ex);
         }
 
@@ -344,6 +430,61 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
     private void radioButtonMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonMasculinoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioButtonMasculinoActionPerformed
+
+    private void buttonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarActionPerformed
+
+        int linhaSelecionada = -1;
+
+        linhaSelecionada = tabelaCadastrosPacientes.getSelectedRow();
+
+        if(linhaSelecionada >= 0) {
+
+            int idPaciente = (Integer)tabelaCadastrosPacientes.getValueAt(linhaSelecionada, 0);
+
+            try {
+                Paciente pacienteDoBanco = pacienteController.buscarPorId(idPaciente);
+
+                pacienteController.abrirTelaAlterarPaciente(pacienteDoBanco);
+
+                dispose();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha!");
+        }
+
+    }//GEN-LAST:event_buttonAlterarActionPerformed
+
+    private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed
+
+        dispose();
+        new TelaPrincipal().setVisible(true);
+
+    }//GEN-LAST:event_buttonHomeActionPerformed
+
+    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
+
+        int linhaSelecionada = -1;
+
+        linhaSelecionada = tabelaCadastrosPacientes.getSelectedRow();
+
+        if(linhaSelecionada >= 0) {
+
+            int idPaciente = (Integer)tabelaCadastrosPacientes.getValueAt(linhaSelecionada, 0);
+
+            try {
+                pacienteController.excluir(idPaciente);
+                refreshTabela();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha!");
+        }
+
+    }//GEN-LAST:event_buttonExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -385,8 +526,11 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAlterar;
     private javax.swing.JButton buttonCadastrar;
+    private javax.swing.JButton buttonExcluir;
     private javax.swing.ButtonGroup buttonGroupSexo;
+    private javax.swing.JButton buttonHome;
     private javax.swing.JLabel labelBanner;
     private javax.swing.JLabel labelCPF;
     private javax.swing.JLabel labelDataNascimento;

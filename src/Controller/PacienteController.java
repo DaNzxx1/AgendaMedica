@@ -2,7 +2,23 @@ package Controller;
 
 import Entidades.Paciente;
 import Persistencia.PacienteDAO;
+import View.TelaAlterarPaciente;
+import com.lowagie.text.Cell;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Table;
+import com.lowagie.text.pdf.PdfWriter;
+import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -10,12 +26,7 @@ public class PacienteController {
     
     StringBuilder mensagensDeErro = new StringBuilder();
     PacienteDAO pacienteDao = new PacienteDAO();
-    
-    public List<Paciente> listarTodosPacientes() throws SQLException {
-
-        return pacienteDao.listarTodos();
-
-    }
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
     public boolean cadastrarPaciente(Paciente paciente) throws SQLException {
         
@@ -96,10 +107,50 @@ public class PacienteController {
         }
         
         if(mensagensDeErro.length() != 0) {
-            JOptionPane.showMessageDialog(null, mensagensDeErro.toString());
+            apresentarPoUp();
             return false;
         } 
         
         return true;
+    }
+    
+    public void abrirTelaAlterarPaciente(Paciente paciente) throws SQLException {
+        
+        TelaAlterarPaciente telaAlterarPaciente = new TelaAlterarPaciente();
+        telaAlterarPaciente.txtIdPaciente.setText(String.valueOf(paciente.getId()));
+        telaAlterarPaciente.txtCPFformatado.setText(paciente.getCpf());
+        telaAlterarPaciente.txtNome.setText(paciente.getNome());
+        telaAlterarPaciente.txtEndereco.setText(paciente.getEndereco());
+        telaAlterarPaciente.txtTelefone.setText(paciente.getTelefone());
+        telaAlterarPaciente.txtDataNascimento.setText(sdf.format(paciente.getDataDeNascimento()));
+        if(paciente.getSexo() == 'M') 
+            telaAlterarPaciente.radioButtonMasculino.setSelected(true);
+        if(paciente.getSexo() == 'F') 
+            telaAlterarPaciente.radioButtonFeminino.setSelected(true);
+        if(paciente.getSexo() == 'O') 
+            telaAlterarPaciente.radioButtonOutrosSexo.setSelected(true);
+        
+        telaAlterarPaciente.setVisible(true);
+        
+    }
+    
+    public void excluir(int idPaciente) throws SQLException {
+        pacienteDao.deletar(pacienteDao.buscarPorId(idPaciente));
+    }
+    
+    public void alterarPaciente(Paciente paciente) throws SQLException {
+        pacienteDao.atualizar(paciente);
+    }
+    
+    public Paciente buscarPorId(int id) throws SQLException {
+        return (Paciente) pacienteDao.buscarPorId(id);
+    }
+    
+    public List<Paciente> listarTodosPacientes() throws SQLException {
+        return pacienteDao.listarTodos();
+    }
+    
+    private void apresentarPoUp() {
+        JOptionPane.showMessageDialog(null, mensagensDeErro.toString());
     }
 }
