@@ -273,11 +273,11 @@ public class TelaAlterarPlanoDeSaude extends javax.swing.JFrame {
     private javax.swing.JLabel labelRegistroAns;
     private javax.swing.JLabel labelTelefone;
     private javax.swing.JPanel painelDados;
-    private javax.swing.JTextField txtCodigoPlano;
-    private javax.swing.JTextField txtEndereco;
+    public javax.swing.JTextField txtCodigoPlano;
+    public javax.swing.JTextField txtEndereco;
     public javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtOperadora;
-    private javax.swing.JTextField txtRegistroAns;
-    private javax.swing.JFormattedTextField txtTelefone;
+    public javax.swing.JTextField txtOperadora;
+    public javax.swing.JTextField txtRegistroAns;
+    public javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }
