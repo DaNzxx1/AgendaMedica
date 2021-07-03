@@ -60,6 +60,8 @@ public class TelaAlterarPaciente extends javax.swing.JFrame {
         buttonVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Alterar Paciente");
+        setResizable(false);
 
         labelBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/banner.PNG"))); // NOI18N
 
@@ -282,7 +284,7 @@ public class TelaAlterarPaciente extends javax.swing.JFrame {
 
             pacienteController.alterarPaciente(paciente);
             JOptionPane.showMessageDialog(null, "Paciente alterado com Sucesso!");
-            new TelaPrincipal().setVisible(true);
+            new TelaCadastroPaciente().setVisible(true);
             
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "A data de nascimento deve ser preenchida");

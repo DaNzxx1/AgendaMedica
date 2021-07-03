@@ -25,43 +25,44 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
     PlanoDeSaudeController planoDeSaudeController = new PlanoDeSaudeController();
     DefaultTableModel tabelaPadrao;
     DefaultTableCellRenderer renderizadorDeCelula = new DefaultTableCellRenderer();
-    
+
     public TelaCadastroPlanoDeSaude() throws SQLException {
-        
+
         initComponents();
-        
+
         setLocationRelativeTo(null);
-        
+
         renderizadorDeCelula.setHorizontalAlignment(SwingConstants.CENTER);
-        
+
         tabelaCadastrosPlanoDeSaude.getTableHeader().setDefaultRenderer(renderizadorDeCelula);
-        
-        for(int i = 0; i < tabelaCadastrosPlanoDeSaude.getColumnCount(); i++) {
-            if(i != 4) 
+
+        for (int i = 0; i < tabelaCadastrosPlanoDeSaude.getColumnCount(); i++) {
+            if (i != 4) {
                 tabelaCadastrosPlanoDeSaude.getColumnModel().getColumn(i).setCellRenderer(renderizadorDeCelula);
+            }
         }
-        
-        DefaultTableModel tabelaPadrao = (DefaultTableModel)tabelaCadastrosPlanoDeSaude.getModel();
-        
-        for(PlanoDeSaude planoDeSaude : planoDeSaudeController.listarTodosPlanoDeSaude()) {
-            tabelaPadrao.addRow(new Object[] {
-                planoDeSaude.getId(),
-                planoDeSaude.getCodigoPlano(),
-                planoDeSaude.getOperadora(),
-                planoDeSaude.getTelefone(),
-                planoDeSaude.getEndereco(),
-                planoDeSaude.getRegistroANS()
-            });
-        }
-        
-        tabelaPadrao = (DefaultTableModel)tabelaCadastrosPlanoDeSaude.getModel();
-        
-    }
-    
-    private void atualizarTabela() throws SQLException {
-        
+
+        DefaultTableModel tabelaPadrao = (DefaultTableModel) tabelaCadastrosPlanoDeSaude.getModel();
+
         for (PlanoDeSaude planoDeSaude : planoDeSaudeController.listarTodosPlanoDeSaude()) {
-            tabelaPadrao.addRow(new Object[] {
+            tabelaPadrao.addRow(new Object[]{
+                planoDeSaude.getId(),
+                planoDeSaude.getCodigoPlano(),
+                planoDeSaude.getOperadora(),
+                planoDeSaude.getTelefone(),
+                planoDeSaude.getEndereco(),
+                planoDeSaude.getRegistroANS()
+            });
+        }
+
+        tabelaPadrao = (DefaultTableModel) tabelaCadastrosPlanoDeSaude.getModel();
+
+    }
+
+    private void atualizarTabela() throws SQLException {
+
+        for (PlanoDeSaude planoDeSaude : planoDeSaudeController.listarTodosPlanoDeSaude()) {
+            tabelaPadrao.addRow(new Object[]{
                 planoDeSaude.getId(),
                 planoDeSaude.getCodigoPlano(),
                 planoDeSaude.getOperadora(),
@@ -71,33 +72,33 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
             });
         }
     }
-    
+
     private void limparFormulario() {
-        
+
         for (int i = 0; i < painelDados.getComponentCount(); i++) {
             //Varre todos os componentes do painel
-            
+
             Component componente = painelDados.getComponent(i);
-            
-            if(componente instanceof JTextField) {
+
+            if (componente instanceof JTextField) {
                 //Apaga os valores
-                JTextField field = (JTextField)componente;
+                JTextField field = (JTextField) componente;
                 field.setText(null);
             }
-            
-            if(componente instanceof JFormattedTextField) {
+
+            if (componente instanceof JFormattedTextField) {
                 //Apaga os valores
-                JFormattedTextField fieldFormated = (JFormattedTextField)componente;
+                JFormattedTextField fieldFormated = (JFormattedTextField) componente;
                 fieldFormated.setText(null);
             }
         }
     }
 
     private void refreshTabela() throws SQLException {
-        
+
         new TelaCadastroPlanoDeSaude().setVisible(true);
         dispose();
-    }    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -327,21 +328,17 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
         planoDeSaude.setEndereco(txtEndereco.getText().trim());
         planoDeSaude.setTelefone(txtTelefone.getText());
         planoDeSaude.setRegistroANS(txtRegistroAns.getText().trim());
-        
-        try {
-            
-            if(planoDeSaudeController.cadastrarPlanoDeSaude(planoDeSaude)) {
-                JOptionPane.showMessageDialog(null, "Plano de Saúde cadastrado com Sucesso!!!!");
 
-                dispose();
-                TelaPrincipal telaPrincipal = new TelaPrincipal();
-                telaPrincipal.setVisible(true);
-                telaPrincipal.setLocationRelativeTo(null);
+        try {
+
+            if (planoDeSaudeController.cadastrarPlanoDeSaude(planoDeSaude)) {
+                JOptionPane.showMessageDialog(null, "Plano de Saúde cadastrado com Sucesso!!!!");
+                refreshTabela();
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
+
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
     private void buttonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarActionPerformed
@@ -350,9 +347,9 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
 
         linhaSelecionada = tabelaCadastrosPlanoDeSaude.getSelectedRow();
 
-        if(linhaSelecionada >= 0) {
+        if (linhaSelecionada >= 0) {
 
-            int id = (Integer)tabelaCadastrosPlanoDeSaude.getValueAt(linhaSelecionada, 0);
+            int id = (Integer) tabelaCadastrosPlanoDeSaude.getValueAt(linhaSelecionada, 0);
 
             try {
                 PlanoDeSaude planoDeSaudeDoBanco = planoDeSaudeController.buscarPorId(id);
@@ -380,9 +377,9 @@ public class TelaCadastroPlanoDeSaude extends javax.swing.JFrame {
 
         linhaSelecionada = tabelaCadastrosPlanoDeSaude.getSelectedRow();
 
-        if(linhaSelecionada >= 0) {
+        if (linhaSelecionada >= 0) {
 
-            int id = (Integer)tabelaCadastrosPlanoDeSaude.getValueAt(linhaSelecionada, 0);
+            int id = (Integer) tabelaCadastrosPlanoDeSaude.getValueAt(linhaSelecionada, 0);
 
             try {
                 planoDeSaudeController.excluir(id);

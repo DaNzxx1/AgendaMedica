@@ -253,7 +253,7 @@ public class PacienteController {
                 celulaPacienteSexo.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tabelaPacientes.addCell(celulaPacienteSexo);
                 
-                paragrafoTelefone = new Paragraph(new Phrase(15F, "R$ "+ paciente.getTelefone(),
+                paragrafoTelefone = new Paragraph(new Phrase(15F, paciente.getTelefone(),
                     FontFactory.getFont(FontFactory.HELVETICA, 9F)));
                 paragrafoTelefone.setAlignment(Element.ALIGN_CENTER);
                 celulaPacienteTelefone = new Cell(paragrafoTelefone);
@@ -261,7 +261,7 @@ public class PacienteController {
                 celulaPacienteTelefone.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tabelaPacientes.addCell(celulaPacienteTelefone);
                 
-                paragrafoEndereco = new Paragraph(new Phrase(15F, "R$ "+ paciente.getEndereco(),
+                paragrafoEndereco = new Paragraph(new Phrase(15F, paciente.getEndereco(),
                     FontFactory.getFont(FontFactory.HELVETICA, 9F)));
                 paragrafoEndereco.setAlignment(Element.ALIGN_CENTER);
                 celulaPacienteEndereco = new Cell(paragrafoEndereco);

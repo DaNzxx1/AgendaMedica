@@ -406,11 +406,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
             if(usuarioController.cadastrarUsuario(usuario)) {
                 JOptionPane.showMessageDialog(null, "Usuário cadastrado com Sucesso!");
                 limparFormulario();
-                dispose();
                 refreshTabela();
-                TelaPrincipal telaPrincipal = new TelaPrincipal();
-                telaPrincipal.setVisible(true);
-                telaPrincipal.setLocationRelativeTo(null);
             }
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "A data de nascimento deve ser preenchida");

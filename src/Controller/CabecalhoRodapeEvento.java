@@ -18,18 +18,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CabecalhoRodapeEvento extends PdfPageEventHelper {
-    
-    public void onStartPage(PdfWriter writer, Document document) {
-        
-        Phrase tituloETB = new Phrase(20F, "ESCOLA TÉCNICA DE BRASÍLIA",
-                FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14F));
-        
-        Phrase tituloDisciplina = new Paragraph(new Phrase(20F, "LINGUAGEM TÉCNICA DE PROGRAMAÇÃO II",
-                FontFactory.getFont(FontFactory.HELVETICA, 10F)));
 
-        Phrase turma_professor = new Phrase(15F, "TURMA: 3F- INFORMÁTICA / PROFESSOR: Ivan",
-                FontFactory.getFont(FontFactory.HELVETICA, 10F));
-        
+    public void onStartPage(PdfWriter writer, Document document) {
+
+        Phrase tituloHospital = new Phrase(20F, "HOSPITAL SCHRODINGER",
+                FontFactory.getFont(FontFactory.TIMES_BOLD, 16F));
+
+        Phrase tituloEndereco = new Paragraph(new Phrase(20F, "SMHS - Área Especial, Q. 101 - Asa Sul, Brasília - DF, Brasil",
+                FontFactory.getFont(FontFactory.TIMES_BOLD, 13F)));
+
+        Phrase tituloBordao = new Phrase(20F, "\"O Trabalho é nosso, o resultado é seu!\"",
+                FontFactory.getFont(FontFactory.TIMES_BOLD, 11F));
+
         Image imagem;
         try {
             imagem = Image.getInstance("Imagens/banner_relatorios.PNG");
@@ -37,10 +37,10 @@ public class CabecalhoRodapeEvento extends PdfPageEventHelper {
             imagem.setAlignment(Element.ALIGN_CENTER);
             imagem.setAbsolutePosition(120, 490);
             writer.getDirectContent().addImage(imagem, true);
-            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, tituloETB, 420, 490, 0);
-            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, tituloDisciplina, 420, 480, 0);
-            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, turma_professor, 420, 470, 0);
-            
+            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, tituloHospital, 420, 490, 0);
+            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, tituloEndereco, 420, 480, 0);
+            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, tituloBordao, 420, 470, 0);
+
         } catch (BadElementException ex) {
             System.out.println(ex);
         } catch (IOException ex) {
@@ -49,11 +49,13 @@ public class CabecalhoRodapeEvento extends PdfPageEventHelper {
             Logger.getLogger(CabecalhoRodapeEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void onEndPage(PdfWriter writer, Document document) {
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase("BRASÍLIA, " + sdf.format(new Date()) + "."), 120, 20, 0);
-        ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase("PÁGINA " + document.getPageNumber()), 750, 20, 0);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy 'às' HH:mm");
+        ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase("BRASÍLIA, " + sdf.format(new Date()) + ".", 
+                FontFactory.getFont(FontFactory.TIMES_BOLD, 14F)), 150, 20, 0);
+        ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase(" " + document.getPageNumber(), 
+                FontFactory.getFont(FontFactory.TIMES_BOLD, 14F)), 800, 20, 0);
     }
 }

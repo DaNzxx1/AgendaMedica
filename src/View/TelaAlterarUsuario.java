@@ -64,6 +64,8 @@ public class TelaAlterarUsuario extends javax.swing.JFrame {
         labelBanner = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Alterar Usuário");
+        setResizable(false);
 
         painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Alteração de Usuário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
@@ -265,7 +267,7 @@ public class TelaAlterarUsuario extends javax.swing.JFrame {
 
             usuarioController.alterarUsuario(usuario);
             JOptionPane.showMessageDialog(null, "Usuário alterado com Sucesso!");
-            new TelaPrincipal().setVisible(true);
+            new TelaCadastroUsuario().setVisible(true);
             
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "A data de nascimento deve ser preenchida");

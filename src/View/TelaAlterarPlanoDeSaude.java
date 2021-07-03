@@ -53,6 +53,8 @@ public class TelaAlterarPlanoDeSaude extends javax.swing.JFrame {
         buttonVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Alterar Plano de Saúde");
+        setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/banner.PNG"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -207,7 +209,7 @@ public class TelaAlterarPlanoDeSaude extends javax.swing.JFrame {
         try {
             planoDeSaudeController.alterarPlanoDeSaude(planoDeSaude);
             JOptionPane.showMessageDialog(null, "Plano de Saúde alterado com Sucesso!");
-            new TelaPrincipal().setVisible(true);
+            new TelaCadastroPlanoDeSaude().setVisible(true);
         } catch (SQLException ex) {
             System.out.println(ex);
         }

@@ -151,7 +151,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="menuItemRelContultas">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Imagens/icon_relatorio_paciente.png"/>
+                  <Image iconType="3" name="/Imagens/icon_relatorio_consulta.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Consultas"/>
               </Properties>
@@ -179,6 +179,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Tela Principal"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="menuBarPrincipal"/>

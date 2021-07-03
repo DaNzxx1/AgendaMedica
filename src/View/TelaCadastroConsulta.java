@@ -167,7 +167,7 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
         comboBoxMedico.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         buttonCadastrar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        buttonCadastrar.setText("Cadastrar");
+        buttonCadastrar.setText("Salvar");
         buttonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCadastrarActionPerformed(evt);
@@ -207,7 +207,7 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
                         .addComponent(labelPaciente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboBoxPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonCadastrar)
                 .addContainerGap())
         );
@@ -279,7 +279,7 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
             tabelaCadastrosConsultas.getColumnModel().getColumn(6).setPreferredWidth(120);
         }
 
-        buttonExcluir.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        buttonExcluir.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         buttonExcluir.setText("EXCLUIR");
         buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,8 +287,8 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
             }
         });
 
-        buttonAlterar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        buttonAlterar.setText("ALTERAR");
+        buttonAlterar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        buttonAlterar.setText("SELECIONAR DADOS");
         buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAlterarActionPerformed(evt);
@@ -296,7 +296,7 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
         });
 
         buttonHome.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        buttonHome.setText("Home");
+        buttonHome.setText("HOME");
         buttonHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonHomeActionPerformed(evt);
@@ -313,19 +313,18 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(labelBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
+                        .addGap(77, 77, 77)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(painelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(scrollPaneTabela))))
+                            .addComponent(scrollPaneTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(buttonAlterar)
+                                .addGap(39, 39, 39)
+                                .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(buttonExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,13 +335,12 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
                 .addComponent(painelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPaneTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(buttonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(buttonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonExcluir))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -364,18 +362,11 @@ public class TelaCadastroConsulta extends javax.swing.JFrame {
             if (idConsulta > 0) {
                 consultaController.atualizarConsulta(consulta);
                 JOptionPane.showMessageDialog(null, "Consulta alterada com Sucesso!");
-                dispose();
-                TelaPrincipal telaPrincipal = new TelaPrincipal();
-                telaPrincipal.setVisible(true);
-                telaPrincipal.setLocationRelativeTo(null);
+                refreshTabela();
             } else {
                 if (consultaController.cadastrarConsulta(consulta)) {
                     JOptionPane.showMessageDialog(null, "Consulta cadastrado com Sucesso!");
-
-                    dispose();
-                    TelaPrincipal telaPrincipal = new TelaPrincipal();
-                    telaPrincipal.setVisible(true);
-                    telaPrincipal.setLocationRelativeTo(null);
+                    refreshTabela();
                 }
             }
         } catch (ParseException ex) {

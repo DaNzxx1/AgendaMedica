@@ -57,6 +57,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal");
+        setResizable(false);
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -168,7 +169,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuRelatorios.add(menuItemRelPaciente);
 
-        menuItemRelContultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_relatorio_paciente.png"))); // NOI18N
+        menuItemRelContultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon_relatorio_consulta.png"))); // NOI18N
         menuItemRelContultas.setText("Relatório de Consultas");
         menuItemRelContultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

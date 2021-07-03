@@ -58,6 +58,8 @@ public class TelaAlterarMedico extends javax.swing.JFrame {
         txtCrm = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Alterar Médico");
+        setResizable(false);
 
         painelDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulário de Alteração do Médico", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
@@ -272,7 +274,7 @@ public class TelaAlterarMedico extends javax.swing.JFrame {
 
             medicoController.alterarMedico(medico);
             JOptionPane.showMessageDialog(null, "Médico alterado com Sucesso!");
-            new TelaPrincipal().setVisible(true);
+            new TelaCadastroMedico().setVisible(true);
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "A data de nascimento deve ser preenchida");
         } catch (SQLException ex) {

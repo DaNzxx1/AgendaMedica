@@ -387,11 +387,7 @@ public class TelaCadastroMedico extends javax.swing.JFrame {
             
             if(medicoController.cadastrarMedico(medico)) {
                 JOptionPane.showMessageDialog(null, "Médico cadastrado com Sucesso!!!");
-
-                dispose();
-                TelaPrincipal telaPrincipal = new TelaPrincipal();
-                telaPrincipal.setVisible(true);
-                telaPrincipal.setLocationRelativeTo(null);
+                refreshTabela();
             }
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "A data de nascimento deve ser preenchida");
